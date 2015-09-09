@@ -59,6 +59,13 @@ You are welcome to:
 library(gofastr)
 (x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
 remove_stopwords(x)
+
 (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 remove_stopwords(y)
+```
+
+To change weighting...
+
+```{r}
+tm::weightTfIdf(x)
 ```

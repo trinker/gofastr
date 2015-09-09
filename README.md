@@ -112,3 +112,13 @@ Examples
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
+
+To change weighting...
+
+    tm::weightTfIdf(x)
+
+    ## <<DocumentTermMatrix (documents: 2910, terms: 3368)>>
+    ## Non-/sparse entries: 37836/9763044
+    ## Sparsity           : 100%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency - inverse document frequency (normalized) (tf-idf)

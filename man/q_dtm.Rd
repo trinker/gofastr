@@ -25,7 +25,8 @@ Make a \code{\link[tm]{DocumentTermMatrix}} from a vector of text and and
 optional vector of documents.
 }
 \examples{
-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
+(x <- with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
+tm::weightTfIdf(x)
 }
 \keyword{DocumentTermMatrix}
 \keyword{dtm}

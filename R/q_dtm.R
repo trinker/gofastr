@@ -14,7 +14,8 @@
 #' @export
 #' @importFrom data.table :=
 #' @examples
-#' with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
+#' (x <- with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
+#' tm::weightTfIdf(x)
 q_dtm <- function(text, docs = seq_along(text), weighting = tm::weightTf, ...){
     . <- x <- y <- NULL
     dat <- data.table::data.table(y = stringi::stri_trans_tolower(text), x = docs)[,

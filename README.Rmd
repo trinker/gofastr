@@ -1,0 +1,64 @@
+---
+title: "gofastr"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  md_document:
+    toc: true      
+---
+
+```{r, echo=FALSE}
+desc <- suppressWarnings(readLines("DESCRIPTION"))
+regex <- "(^Version:\\s+)(\\d+\\.\\d+\\.\\d+)"
+loc <- grep(regex, desc)
+ver <- gsub(regex, "\\2", desc[loc])
+verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg"><img src="https://img.shields.io/badge/Version-%s-orange.svg" alt="Version"/></a></p>', ver, ver)
+````
+
+[![Build Status](https://travis-ci.org/trinker/gofastr.svg?branch=master)](https://travis-ci.org/trinker/gofastr)
+[![Coverage Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](https://coveralls.io/r/trinker/gofastr?branch=master)
+`r verbadge`
+
+<img src="inst/gofastr_logo/r_gofastr.png" width="150" alt="readability Logo">  
+
+
+**gofastr** is designed to do one thing really well...It harnesses the power of **data.table** and **stringi** to quickly generate **tm** `DocumentTermMatrix` and `TermDocumentMatrix` data structures. 
+
+In my work I often get data in the form of large .csv files.  The `Corpus` structure is an unnecessary step that requires additional run time.  **gofastr** skips this step and uses **data.table** and **stringi** to quickly make the `DocumentTermMatrix` and `TermDocumentMatrix` data structures directly.  
+
+There are three functions:
+
+| Function           |  Description                                          |
+|--------------------|-------------------------------------------------------|
+| `q_tdm`            | `TermDocumentMatrix` from string vector |
+| `q_dtm`            | `DocumentTermMatrix` from string vector |
+| `remove_stopwords` | Remove stopwords and minimal character words from `TermDocumentMatrix`/`DocumentTermMatrix` |
+
+
+# Installation
+
+To download the development version of **gofastr**:
+
+Download the [zip ball](https://github.com/trinker/gofastr/zipball/master) or [tar ball](https://github.com/trinker/gofastr/tarball/master), decompress and run `R CMD INSTALL` on it, or use the **pacman** package to install the development version:
+
+```r
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load_gh("trinker/gofastr")
+```
+
+# Contact
+
+You are welcome to:
+* submit suggestions and bug-reports at: <https://github.com/trinker/gofastr/issues>
+* send a pull request on: <https://github.com/trinker/gofastr/>
+* compose a friendly e-mail to: <tyler.rinker@gmail.com>
+
+
+# Examples
+
+```{r}
+library(gofastr)
+(x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
+remove_stopwords(x)
+(y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
+remove_stopwords(y)
+```

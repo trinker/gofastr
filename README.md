@@ -12,6 +12,9 @@ Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](htt
 
 **NOTE: Initial testing shows this approach to be slower than a tm approach...More work to come...Pull requests appreciated**
 
+<img src="https://www.tomfooleryat34.com/modules/core/img/skeleton/flashing_arrow_up.gif" alt="arrow" style="height:228px;">
+
+
 **gofastr** is designed to do one thing really well...It harnesses the
 power of **data.table** and **stringi** to quickly generate **tm**
 `DocumentTermMatrix` and `TermDocumentMatrix` data structures.

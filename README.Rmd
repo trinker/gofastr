@@ -29,8 +29,8 @@ There are three functions:
 
 | Function           |  Description                                          |
 |--------------------|-------------------------------------------------------|
-| `q_tdm`            | `TermDocumentMatrix` from string vector |
-| `q_dtm`            | `DocumentTermMatrix` from string vector |
+| `q_tdm` & `q_tdm_stem`            | `TermDocumentMatrix` from string vector |
+| `q_dtm` & `q_dtm_stem`           | `DocumentTermMatrix` from string vector |
 | `remove_stopwords` | Remove stopwords and minimal character words from `TermDocumentMatrix`/`DocumentTermMatrix` |
 
 
@@ -68,4 +68,11 @@ To change weighting...
 
 ```{r}
 tm::weightTfIdf(x)
+```
+
+To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize **SnowballC**'s stemmer under the hood.
+
+```{r}
+(z <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
+remove_stopwords(z)
 ```

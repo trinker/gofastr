@@ -31,11 +31,11 @@ There are three functions:
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>q_tdm</code></td>
+<td align="left"><code>q_tdm</code> &amp; <code>q_tdm_stem</code></td>
 <td align="left"><code>TermDocumentMatrix</code> from string vector</td>
 </tr>
 <tr class="even">
-<td align="left"><code>q_dtm</code></td>
+<td align="left"><code>q_dtm</code> &amp; <code>q_dtm_stem</code></td>
 <td align="left"><code>DocumentTermMatrix</code> from string vector</td>
 </tr>
 <tr class="odd">
@@ -99,16 +99,16 @@ Examples
 
     (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 
-    ## <<TermDocumentMatrix (terms: 3368, documents: 2910)>>
-    ## Non-/sparse entries: 37836/9763044
+    ## <<TermDocumentMatrix (terms: 3369, documents: 2912)>>
+    ## Non-/sparse entries: 37838/9772690
     ## Sparsity           : 100%
-    ## Maximal term length: 16
+    ## Maximal term length: NA
     ## Weighting          : term frequency (tf)
 
     remove_stopwords(y)
 
-    ## <<TermDocumentMatrix (terms: 3180, documents: 2910)>>
-    ## Non-/sparse entries: 19014/9234786
+    ## <<TermDocumentMatrix (terms: 3180, documents: 2912)>>
+    ## Non-/sparse entries: 19014/9241146
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -122,3 +122,22 @@ To change weighting...
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency - inverse document frequency (normalized) (tf-idf)
+
+To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
+**SnowballC**'s stemmer under the hood.
+
+    (z <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
+
+    ## <<DocumentTermMatrix (documents: 2910, terms: 2495)>>
+    ## Non-/sparse entries: 37516/7222934
+    ## Sparsity           : 99%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency (tf)
+
+    remove_stopwords(z)
+
+    ## <<DocumentTermMatrix (documents: 2910, terms: 2334)>>
+    ## Non-/sparse entries: 20170/6771770
+    ## Sparsity           : 100%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency (tf)

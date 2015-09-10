@@ -26,7 +26,7 @@ remove_stopwords.TermDocumentMatrix  <- function(x, stopwords = tm::stopwords("e
         x <- x[!rownames(x) %in% stopwords, ]
     }
     if (!is.null(min.char)){
-        x <- x[nchar(rownames(x)) > min.char - 1, ]
+        x <- x[!is.na(rownames(x)) & nchar(rownames(x)) > min.char - 1, ]
     }
     x
 }

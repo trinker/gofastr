@@ -3,6 +3,8 @@
 S3method(remove_stopwords,DocumentTermMatrix)
 S3method(remove_stopwords,TermDocumentMatrix)
 export(q_dtm)
+export(q_dtm_stem)
 export(q_tdm)
+export(q_tdm_stem)
 export(remove_stopwords)
 importFrom(data.table,":=")

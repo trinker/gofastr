@@ -2,9 +2,13 @@
 % Please edit documentation in R/q_tdm.R
 \name{q_tdm}
 \alias{q_tdm}
+\alias{q_tdm_stem}
 \title{Quick TermDocumentMatrix}
 \usage{
 q_tdm(text, docs = seq_along(text), weighting = tm::weightTf, ...)
+
+q_tdm_stem(text, docs = seq_along(text), weighting = tm::weightTf,
+  language = "porter", ...)
 }
 \arguments{
 \item{text}{A vector of strings.}
@@ -15,6 +19,8 @@ q_tdm(text, docs = seq_along(text), weighting = tm::weightTf, ...)
 \code{\link[tm]{weightTfIdf}}, \code{\link[tm]{weightBin}}, or
 \code{\link[tm]{weightSMART}}.}
 
+\item{language}{The name of a recognized language (see \code{\link[SnowballC]{wordStem}})}
+
 \item{\ldots}{Additional arguments passed to \code{\link[tm]{as.TermDocumentMatrix}}.}
 }
 \value{
@@ -22,11 +28,15 @@ Returns a \code{\link[tm]{TermDocumentMatrix}}.
 }
 \description{
 Make a \code{\link[tm]{TermDocumentMatrix}} from a vector of text and and
-optional vector of documents.
+optional vector of documents.  To stem a document as well use the
+\code{q_tdm_stem} version of \code{q_tdm} which uses \pkg{SnowballC}'s
+\code{\link[SnowballC]{wordStem}}.
 }
 \examples{
 (x <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 tm::weightTfIdf(x)
+
+(x2 <- with(presidential_debates_2012, q_tdm_stem(dialogue, paste(time, tot, sep = "_"))))
 }
 \keyword{TermDocumentMatrix}
 \keyword{tdm}

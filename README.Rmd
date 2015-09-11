@@ -76,3 +76,60 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize **SnowballC**'
 (z <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
 remove_stopwords(z)
 ```
+
+## Comparing Timings
+
+On a smaller `r nrow(presidential_debates_2012)` rows these are the time comparisons between **gofastr** adn **tm** using `Sys.time`:
+
+```{r}
+pacman::p_load(gofastr, tm)
+
+pd <- presidential_debates_2012
+tic <- Sys.time()
+rownames(pd) <- paste("docs", 1:nrow(pd))
+pd[['groups']] <- with(pd, paste(time, tot, sep = "_"))
+pd <- Corpus(DataframeSource(pd[, 5:6, drop=FALSE]))
+
+(out <- DocumentTermMatrix(pd,
+    control = list(
+        tokenize=scan_tokenizer,
+        stopwords=TRUE,
+        removeNumbers = TRUE,
+        removePunctuation = TRUE,
+        wordLengths=c(3, Inf)
+    )
+) )
+difftime(Sys.time(), tic)
+
+tic <- Sys.time()
+x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
+remove_stopwords(x)
+difftime(Sys.time(), tic)
+```
+
+Here I include stemming:
+
+```{r}
+pd <- presidential_debates_2012
+tic <- Sys.time()
+rownames(pd) <- paste("docs", 1:nrow(pd))
+pd[['groups']] <- with(pd, paste(time, tot, sep = "_"))
+pd <- Corpus(DataframeSource(pd[, 5:6, drop=FALSE]))
+pd <- tm_map(pd, stemDocument)
+
+(out <- DocumentTermMatrix(pd,
+    control = list(
+        tokenize=scan_tokenizer,
+        stopwords=TRUE,
+        removeNumbers = TRUE,
+        removePunctuation = TRUE,
+        wordLengths=c(3, Inf)
+    )
+) )
+difftime(Sys.time(), tic)
+
+tic <- Sys.time()
+x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
+remove_stopwords(x, stem=TRUE)
+difftime(Sys.time(), tic)
+```

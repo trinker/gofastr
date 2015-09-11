@@ -11,7 +11,7 @@
 #' \code{\link[tm]{weightTfIdf}}, \code{\link[tm]{weightBin}}, or
 #' \code{\link[tm]{weightSMART}}.
 #' @param \ldots Additional arguments passed to \code{\link[tm]{as.DocumentTermMatrix}}.
-#' @param language The name of a recognized language (see \code{\link[SnowballC]{wordStem}})
+#' @param language The name of a recognized language (see \code{\link[SnowballC]{wordStem}}).
 #' @return Returns a \code{\link[tm]{DocumentTermMatrix}}.
 #' @keywords dtm DocumentTermMatrix
 #' @export
@@ -22,6 +22,7 @@
 #' tm::weightTfIdf(x)
 #'
 #' (x2 <- with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
+#' remove_stopwords(x2, stem=TRUE)
 q_dtm <- function(text, docs = seq_along(text), weighting = tm::weightTf, ...){
     . <- x <- y <- NULL
     dat <- data.table::data.table(y = stringi::stri_trans_tolower(text), x = docs)[,

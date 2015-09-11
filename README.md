@@ -52,6 +52,7 @@ Table of Contents
 -   [Installation](#installation)
 -   [Contact](#contact)
 -   [Examples](#examples)
+    -   [Comparing Timings](#comparing-timings)
 
 Installation
 ============
@@ -141,3 +142,94 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
+
+Comparing Timings
+-----------------
+
+On a smaller 2912 rows these are the time comparisons between
+**gofastr** adn **tm** using `Sys.time`:
+
+    pacman::p_load(gofastr, tm)
+
+    pd <- presidential_debates_2012
+    tic <- Sys.time()
+    rownames(pd) <- paste("docs", 1:nrow(pd))
+    pd[['groups']] <- with(pd, paste(time, tot, sep = "_"))
+    pd <- Corpus(DataframeSource(pd[, 5:6, drop=FALSE]))
+
+    (out <- DocumentTermMatrix(pd,
+        control = list(
+            tokenize=scan_tokenizer,
+            stopwords=TRUE,
+            removeNumbers = TRUE,
+            removePunctuation = TRUE,
+            wordLengths=c(3, Inf)
+        )
+    ) )
+
+    ## <<DocumentTermMatrix (documents: 2912, terms: 3243)>>
+    ## Non-/sparse entries: 22420/9421196
+    ## Sparsity           : 100%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency (tf)
+
+    difftime(Sys.time(), tic)
+
+    ## Time difference of 4.759427 secs
+
+    tic <- Sys.time()
+    x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
+    remove_stopwords(x)
+
+    ## <<DocumentTermMatrix (documents: 2910, terms: 3180)>>
+    ## Non-/sparse entries: 19014/9234786
+    ## Sparsity           : 100%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency (tf)
+
+    difftime(Sys.time(), tic)
+
+    ## Time difference of 1.008713 secs
+
+Here I include stemming:
+
+    pd <- presidential_debates_2012
+    tic <- Sys.time()
+    rownames(pd) <- paste("docs", 1:nrow(pd))
+    pd[['groups']] <- with(pd, paste(time, tot, sep = "_"))
+    pd <- Corpus(DataframeSource(pd[, 5:6, drop=FALSE]))
+    pd <- tm_map(pd, stemDocument)
+
+    (out <- DocumentTermMatrix(pd,
+        control = list(
+            tokenize=scan_tokenizer,
+            stopwords=TRUE,
+            removeNumbers = TRUE,
+            removePunctuation = TRUE,
+            wordLengths=c(3, Inf)
+        )
+    ) )
+
+    ## <<DocumentTermMatrix (documents: 2912, terms: 2931)>>
+    ## Non-/sparse entries: 22982/8512090
+    ## Sparsity           : 100%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency (tf)
+
+    difftime(Sys.time(), tic)
+
+    ## Time difference of 5.305744 secs
+
+    tic <- Sys.time()
+    x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
+    remove_stopwords(x, stem=TRUE)
+
+    ## <<DocumentTermMatrix (documents: 2910, terms: 2305)>>
+    ## Non-/sparse entries: 18420/6689130
+    ## Sparsity           : 100%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency (tf)
+
+    difftime(Sys.time(), tic)
+
+    ## Time difference of 0.742528 secs

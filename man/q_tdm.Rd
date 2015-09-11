@@ -37,6 +37,7 @@ optional vector of documents.  To stem a document as well use the
 tm::weightTfIdf(x)
 
 (x2 <- with(presidential_debates_2012, q_tdm_stem(dialogue, paste(time, tot, sep = "_"))))
+remove_stopwords(x2, stem=TRUE)
 }
 \keyword{TermDocumentMatrix}
 \keyword{tdm}

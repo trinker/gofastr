@@ -22,6 +22,7 @@
 #' tm::weightTfIdf(x)
 #'
 #' (x2 <- with(presidential_debates_2012, q_tdm_stem(dialogue, paste(time, tot, sep = "_"))))
+#' remove_stopwords(x2, stem=TRUE)
 q_tdm <- function(text, docs = seq_along(text), weighting = tm::weightTf, ...){
     . <- x <- y <- NULL
     dat <- data.table::data.table(y = stringi::stri_trans_tolower(text), x = docs)[,

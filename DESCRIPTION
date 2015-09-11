@@ -10,7 +10,7 @@ Description: Harness the power of 'data.table' and 'stringi' to quickly
 Depends: R (>= 3.2.2)
 Suggests: testthat
 Imports: data.table (>= 1.9.5), slam, SnowballC, stringi, tm
-Date: 2015-09-09
+Date: 2015-09-10
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)

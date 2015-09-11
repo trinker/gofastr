@@ -19,7 +19,7 @@ q_dtm_stem(text, docs = seq_along(text), weighting = tm::weightTf,
 \code{\link[tm]{weightTfIdf}}, \code{\link[tm]{weightBin}}, or
 \code{\link[tm]{weightSMART}}.}
 
-\item{language}{The name of a recognized language (see \code{\link[SnowballC]{wordStem}})}
+\item{language}{The name of a recognized language (see \code{\link[SnowballC]{wordStem}}).}
 
 \item{\ldots}{Additional arguments passed to \code{\link[tm]{as.DocumentTermMatrix}}.}
 }
@@ -37,6 +37,7 @@ optional vector of documents.  To stem a document as well use the
 tm::weightTfIdf(x)
 
 (x2 <- with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
+remove_stopwords(x2, stem=TRUE)
 }
 \keyword{DocumentTermMatrix}
 \keyword{dtm}

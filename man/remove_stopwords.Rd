@@ -4,7 +4,8 @@
 \alias{remove_stopwords}
 \title{Remove Stopwords from a TermDocumentMatrix/DocumentTermMatrix}
 \usage{
-remove_stopwords(x, stopwords = tm::stopwords("english"), min.char = 3)
+remove_stopwords(x, stopwords = tm::stopwords("english"), min.char = 3,
+  max.char = NULL, stem = FALSE)
 }
 \arguments{
 \item{x}{A \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.}
@@ -12,6 +13,10 @@ remove_stopwords(x, stopwords = tm::stopwords("english"), min.char = 3)
 \item{stopwords}{A vector of stopwords to remove.}
 
 \item{min.char}{The minial length character for retained words.}
+
+\item{max.char}{The maximum length character for retained words.}
+
+\item{stem}{Logical.  If \code{TRUE} the \code{stopwords} will be stemmed.}
 }
 \value{
 Returns a \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.

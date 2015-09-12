@@ -84,26 +84,26 @@ Examples
     library(gofastr)
     (x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
 
-    ## <<DocumentTermMatrix (documents: 2910, terms: 3368)>>
-    ## Non-/sparse entries: 37836/9763044
+    ## <<DocumentTermMatrix (documents: 2912, terms: 3368)>>
+    ## Non-/sparse entries: 37836/9769780
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
     remove_stopwords(x)
 
-    ## <<DocumentTermMatrix (documents: 2910, terms: 3180)>>
-    ## Non-/sparse entries: 19014/9234786
+    ## <<DocumentTermMatrix (documents: 2912, terms: 3180)>>
+    ## Non-/sparse entries: 19014/9241146
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
     (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 
-    ## <<TermDocumentMatrix (terms: 3369, documents: 2912)>>
-    ## Non-/sparse entries: 37838/9772690
+    ## <<TermDocumentMatrix (terms: 3368, documents: 2912)>>
+    ## Non-/sparse entries: 37836/9769780
     ## Sparsity           : 100%
-    ## Maximal term length: NA
+    ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
     remove_stopwords(y)
@@ -118,8 +118,10 @@ To change weighting...
 
     tm::weightTfIdf(x)
 
-    ## <<DocumentTermMatrix (documents: 2910, terms: 3368)>>
-    ## Non-/sparse entries: 37836/9763044
+    ## Warning in tm::weightTfIdf(x): empty document(s): time 1_88.1 time 2_52.1
+
+    ## <<DocumentTermMatrix (documents: 2912, terms: 3368)>>
+    ## Non-/sparse entries: 37836/9769780
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency - inverse document frequency (normalized) (tf-idf)
@@ -129,16 +131,16 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
 
     (z <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
 
-    ## <<DocumentTermMatrix (documents: 2910, terms: 2495)>>
-    ## Non-/sparse entries: 37516/7222934
+    ## <<DocumentTermMatrix (documents: 2912, terms: 2495)>>
+    ## Non-/sparse entries: 37516/7227924
     ## Sparsity           : 99%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
     remove_stopwords(z)
 
-    ## <<DocumentTermMatrix (documents: 2910, terms: 2334)>>
-    ## Non-/sparse entries: 20170/6771770
+    ## <<DocumentTermMatrix (documents: 2912, terms: 2334)>>
+    ## Non-/sparse entries: 20170/6776438
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -175,21 +177,21 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 4.759427 secs
+    ## Time difference of 4.510189 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
     remove_stopwords(x)
 
-    ## <<DocumentTermMatrix (documents: 2910, terms: 3180)>>
-    ## Non-/sparse entries: 19014/9234786
+    ## <<DocumentTermMatrix (documents: 2912, terms: 3180)>>
+    ## Non-/sparse entries: 19014/9241146
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.008713 secs
+    ## Time difference of 0.745527 secs
 
 Here I include stemming:
 
@@ -218,18 +220,18 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.305744 secs
+    ## Time difference of 5.187674 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
     remove_stopwords(x, stem=TRUE)
 
-    ## <<DocumentTermMatrix (documents: 2910, terms: 2305)>>
-    ## Non-/sparse entries: 18420/6689130
+    ## <<DocumentTermMatrix (documents: 2912, terms: 2305)>>
+    ## Non-/sparse entries: 18420/6693740
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.742528 secs
+    ## Time difference of 0.6064279 secs

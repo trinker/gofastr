@@ -25,9 +25,13 @@
 #' remove_stopwords(x2, stem=TRUE)
 q_dtm <- function(text, docs = seq_along(text), weighting = tm::weightTf, ...){
     . <- x <- y <- NULL
+
     dat <- data.table::data.table(y = stringi::stri_trans_tolower(text), x = docs)[,
-        .(y = stringi::stri_extract_all_words(y)), by='x'][, .(y = unlist(y)), by = x][!is.na(y),]
+        .(y = stringi::stri_extract_all_words(y)), by='x'][, .(y = unlist(y)), by = x] #[!is.na(y),]
+
     out <- suppressMessages(data.table::dcast(dat, x ~ y, fun=length, drop=FALSE, fill=0))
+    suppressWarnings(out[, 'NA' := NULL])
+
     out2 <- as.matrix(out[, -1, with = FALSE])
     row.names(out2) <- out[[1]]
     tm::as.DocumentTermMatrix(slam::as.simple_triplet_matrix(out2), weighting = weighting, ...)
@@ -39,8 +43,10 @@ q_dtm <- function(text, docs = seq_along(text), weighting = tm::weightTf, ...){
 q_dtm_stem <- function(text, docs = seq_along(text), weighting = tm::weightTf, language = "porter", ...){
     . <- x <- y <- NULL
     dat <- data.table::data.table(y = stringi::stri_trans_tolower(text), x = docs)[,
-        .(y = stringi::stri_extract_all_words(y)), by='x'][, .(y = unlist(y)), by = x][!is.na(y),][, y := SnowballC::wordStem(y, language)]
+        .(y = stringi::stri_extract_all_words(y)), by='x'][, .(y = unlist(y)), by = x][, y := SnowballC::wordStem(y, language)]
     out <- suppressMessages(data.table::dcast(dat, x ~ y, fun=length, drop=FALSE, fill=0))
+    suppressWarnings(out[, 'NA' := NULL])
+
     out2 <- as.matrix(out[, -1, with = FALSE])
     row.names(out2) <- out[[1]]
     tm::as.DocumentTermMatrix(slam::as.simple_triplet_matrix(out2), weighting = weighting, ...)

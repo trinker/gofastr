@@ -6,7 +6,7 @@ gofastr
 Status](https://travis-ci.org/trinker/gofastr.svg?branch=master)](https://travis-ci.org/trinker/gofastr)
 [![Coverage
 Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](https://coveralls.io/r/trinker/gofastr?branch=master)
-<a href="https://img.shields.io/badge/Version-0.0.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.0.1-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.1.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.1.0-orange.svg" alt="Version"/></a>
 </p>
 <img src="inst/gofastr_logo/r_gofastr.png" width="150" alt="readability Logo">
 
@@ -20,7 +20,7 @@ time. **gofastr** skips this step and uses **data.table** and
 **stringi** to quickly make the `DocumentTermMatrix` and
 `TermDocumentMatrix` data structures directly.
 
-There are three functions:
+There are five functions:
 
 <table>
 <thead>
@@ -41,6 +41,14 @@ There are three functions:
 <tr class="odd">
 <td align="left"><code>remove_stopwords</code></td>
 <td align="left">Remove stopwords and minimal character words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>filter_words</code></td>
+<td align="left">Remove words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>select_documents</code></td>
+<td align="left">Remove documents from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
 </tr>
 </tbody>
 </table>
@@ -145,6 +153,42 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
+To filter out word counts below a threshhold...
+
+    (z <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))))
+
+    ## <<DocumentTermMatrix (documents: 10, terms: 3368)>>
+    ## Non-/sparse entries: 8302/25378
+    ## Sparsity           : 75%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency (tf)
+
+    filter_words(z, 5)
+
+    ## <<DocumentTermMatrix (documents: 10, terms: 959)>>
+    ## Non-/sparse entries: 4960/4630
+    ## Sparsity           : 48%
+    ## Maximal term length: 14
+    ## Weighting          : term frequency (tf)
+
+To select only documents matching a regex...
+
+    select_documents(z, 'romney', ignore.case=TRUE)
+
+    ## <<DocumentTermMatrix (documents: 3, terms: 3368)>>
+    ## Non-/sparse entries: 3383/6721
+    ## Sparsity           : 67%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency (tf)
+
+    select_documents(z, '^(?!.*romney).*$', ignore.case = TRUE)
+
+    ## <<DocumentTermMatrix (documents: 7, terms: 3368)>>
+    ## Non-/sparse entries: 4919/18657
+    ## Sparsity           : 79%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency (tf)
+
 Comparing Timings
 -----------------
 
@@ -177,7 +221,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 4.510189 secs
+    ## Time difference of 6.800418 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
@@ -191,7 +235,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.745527 secs
+    ## Time difference of 1.432013 secs
 
 Here I include stemming:
 
@@ -220,7 +264,7 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.187674 secs
+    ## Time difference of 6.098821 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
@@ -234,4 +278,4 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.6064279 secs
+    ## Time difference of 1.099316 secs

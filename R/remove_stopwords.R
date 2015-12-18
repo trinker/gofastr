@@ -8,6 +8,7 @@
 #' @param min.char The minial length character for retained words.
 #' @param max.char The maximum length character for retained words.
 #' @param stem Logical.  If \code{TRUE} the \code{stopwords} will be stemmed.
+#' @param denumber Logical.  If \code{TRUE} numbers will be excluded.
 #' @return Returns a \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.
 #' @keywords stopwords
 #' @export
@@ -17,7 +18,7 @@
 #' (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 #' remove_stopwords(y)
 remove_stopwords  <- function(x, stopwords = tm::stopwords("english"),
-    min.char = 3, max.char = NULL, stem = FALSE) {
+    min.char = 3, max.char = NULL, stem = FALSE, denumber = TRUE) {
 
     UseMethod("remove_stopwords")
 
@@ -26,7 +27,7 @@ remove_stopwords  <- function(x, stopwords = tm::stopwords("english"),
 #' @export
 #' @method remove_stopwords TermDocumentMatrix
 remove_stopwords.TermDocumentMatrix  <- function(x, stopwords = tm::stopwords("english"),
-    min.char = 3, max.char = NULL, stem = FALSE) {
+    min.char = 3, max.char = NULL, stem = FALSE, denumber = TRUE) {
 
     if (!is.null(stopwords)){
         if (isTRUE(stem)) stopwords <- stem(stopwords)
@@ -38,13 +39,16 @@ remove_stopwords.TermDocumentMatrix  <- function(x, stopwords = tm::stopwords("e
     if (!is.null(max.char)){
         x <- x[!is.na(rownames(x)) & nchar(rownames(x)) < max.char + 1, ]
     }
+    if (isTRUE(denumber)){
+        x <- x[!grepl(regex_pattern, rownames(x), perl=TRUE), ]
+    }
     x
 }
 
 #' @export
 #' @method remove_stopwords DocumentTermMatrix
 remove_stopwords.DocumentTermMatrix  <- function(x, stopwords = tm::stopwords("english"),
-    min.char = 3, max.char = NULL, stem = FALSE) {
+    min.char = 3, max.char = NULL, stem = FALSE, denumber = TRUE) {
 
     if (!is.null(stopwords)){
         if (isTRUE(stem)) stopwords <- stem(stopwords)
@@ -56,7 +60,10 @@ remove_stopwords.DocumentTermMatrix  <- function(x, stopwords = tm::stopwords("e
     if (!is.null(max.char)){
         x <- x[, nchar(colnames(x)) < max.char + 1]
     }
+    if (isTRUE(denumber)){
+        x <- x[, !grepl(regex_pattern, colnames(x), perl=TRUE)]
+    }
     x
 }
 
-
+regex_pattern <-"(?<=^| )[-.]*\\d+(?:\\.\\d+)?(?= |\\.?$)|\\d+(?:,\\d{3})+(\\.\\d+)*"

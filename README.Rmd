@@ -80,15 +80,14 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize **SnowballC**'
 remove_stopwords(y)
 ```
 
-To filter out documents with word counts below a threshold...
+To filter out words with counts below a threshold...
 
 ```{r}
 (z <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))))
 filter_words(z, 5)
 ```
 
-To filter out word counts below a threshold...
-
+To filter out documents with word counts below a threshold...
 Remember the warning from above...Say good bye...
 ```{r}
 tm::weightTfIdf(filter_documents(w))

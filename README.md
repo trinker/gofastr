@@ -157,7 +157,7 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
-To filter out documents with word counts below a threshhold...
+To filter out words with counts below a threshold...
 
     (z <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))))
 
@@ -175,9 +175,8 @@ To filter out documents with word counts below a threshhold...
     ## Maximal term length: 14
     ## Weighting          : term frequency (tf)
 
-To filter out word counts below a threshhold...
-
-Remember the warning from above...Say good bye...
+To filter out documents with word counts below a threshold... Remember
+the warning from above...Say good bye...
 
     tm::weightTfIdf(filter_documents(w))
 
@@ -209,7 +208,7 @@ Comparing Timings
 -----------------
 
 On a smaller 2912 rows these are the time comparisons between
-**gofastr** adn **tm** using `Sys.time`:
+**gofastr** and **tm** using `Sys.time`:
 
     pacman::p_load(gofastr, tm)
 
@@ -237,7 +236,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.813922 secs
+    ## Time difference of 6.17691 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
@@ -251,7 +250,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.514115 secs
+    ## Time difference of 1.157823 secs
 
 Here I include stemming:
 
@@ -280,7 +279,7 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 7.004719 secs
+    ## Time difference of 6.263953 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
@@ -294,4 +293,4 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.09792 secs
+    ## Time difference of 1.247883 secs

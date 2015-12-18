@@ -25,15 +25,16 @@ verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg
 
 In my work I often get data in the form of large .csv files.  The `Corpus` structure is an unnecessary step that requires additional run time.  **gofastr** skips this step and uses **data.table** and **stringi** to quickly make the `DocumentTermMatrix` and `TermDocumentMatrix` data structures directly.  
 
-There are five functions:
+There are six functions:
 
 | Function           |  Description                                          |
 |--------------------|-------------------------------------------------------|
 | `q_tdm` & `q_tdm_stem`            | `TermDocumentMatrix` from string vector |
 | `q_dtm` & `q_dtm_stem`           | `DocumentTermMatrix` from string vector |
 | `remove_stopwords` | Remove stopwords and minimal character words from `TermDocumentMatrix`/`DocumentTermMatrix` |
-| `filter_words` | Remove words from `TermDocumentMatrix`/`DocumentTermMatrix` |
-| `select_documents` | Remove documents from `TermDocumentMatrix`/`DocumentTermMatrix` |
+| `filter_words` | Filter words from `TermDocumentMatrix`/`DocumentTermMatrix` |
+| `filter_documents` | Filter documents from a `TermDocumentMatrix`/`DocumentTermMatrix` |
+| `select_documents` | Select documents from `TermDocumentMatrix`/`DocumentTermMatrix` |
 
 
 # Installation
@@ -84,6 +85,13 @@ To filter out word counts below a threshhold...
 ```{r}
 (z <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))))
 filter_words(z, 5)
+```
+
+To select only documents matching a regex...
+
+Remember the warning from above...Say good bye...
+```{r}
+tm::weightTfIdf(filter_documents(w))
 ```
 
 To select only documents matching a regex...

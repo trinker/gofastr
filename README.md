@@ -20,7 +20,7 @@ time. **gofastr** skips this step and uses **data.table** and
 **stringi** to quickly make the `DocumentTermMatrix` and
 `TermDocumentMatrix` data structures directly.
 
-There are five functions:
+There are six functions:
 
 <table>
 <thead>
@@ -44,11 +44,15 @@ There are five functions:
 </tr>
 <tr class="even">
 <td align="left"><code>filter_words</code></td>
-<td align="left">Remove words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+<td align="left">Filter words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
 </tr>
 <tr class="odd">
+<td align="left"><code>filter_documents</code></td>
+<td align="left">Filter documents from a <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+</tr>
+<tr class="even">
 <td align="left"><code>select_documents</code></td>
-<td align="left">Remove documents from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+<td align="left">Select documents from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
 </tr>
 </tbody>
 </table>
@@ -173,6 +177,18 @@ To filter out word counts below a threshhold...
 
 To select only documents matching a regex...
 
+Remember the warning from above...Say good bye...
+
+    tm::weightTfIdf(filter_documents(w))
+
+    ## <<DocumentTermMatrix (documents: 2910, terms: 3368)>>
+    ## Non-/sparse entries: 37836/9763044
+    ## Sparsity           : 100%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency - inverse document frequency (normalized) (tf-idf)
+
+To select only documents matching a regex...
+
     select_documents(z, 'romney', ignore.case=TRUE)
 
     ## <<DocumentTermMatrix (documents: 3, terms: 3368)>>
@@ -221,7 +237,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.291432 secs
+    ## Time difference of 6.2831 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
@@ -235,7 +251,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.237876 secs
+    ## Time difference of 1.486052 secs
 
 Here I include stemming:
 
@@ -264,7 +280,7 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.713979 secs
+    ## Time difference of 6.82943 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
@@ -278,4 +294,4 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.054747 secs
+    ## Time difference of 1.029729 secs

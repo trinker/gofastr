@@ -14,7 +14,7 @@
 #' filter_words(x, 5)
 #' (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 #' filter_words(y, 6)
-filter_words  <- function(x, min = 0) {
+filter_words  <- function(x, min = 1) {
 
     UseMethod("filter_words")
 

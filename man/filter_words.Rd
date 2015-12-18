@@ -2,14 +2,14 @@
 % Please edit documentation in R/filter_words.R
 \name{filter_words}
 \alias{filter_words}
-\title{Remove Words Below a Threshhold TermDocumentMatrix/DocumentTermMatrix}
+\title{Remove Words Below a Threshold TermDocumentMatrix/DocumentTermMatrix}
 \usage{
 filter_words(x, min = 1)
 }
 \arguments{
 \item{x}{A \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.}
 
-\item{min}{A minimal threshhold that a words row/column must sum to.}
+\item{min}{A minimal threshold that a words row/column must sum to.}
 }
 \value{
 Returns a \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.
@@ -17,7 +17,7 @@ Returns a \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMa
 \description{
 Remove words from a \code{\link[tm]{TermDocumentMatrix}}
 or \code{\link[tm]{DocumentTermMatrix}} not meeting a \code{\link[base]{rowSums}}/
-\code{\link[base]{colSums}} threshhold.
+\code{\link[base]{colSums}} threshold.
 }
 \examples{
 (x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))

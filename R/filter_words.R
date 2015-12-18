@@ -1,11 +1,11 @@
-#' Remove Words Below a Threshhold TermDocumentMatrix/DocumentTermMatrix
+#' Remove Words Below a Threshold TermDocumentMatrix/DocumentTermMatrix
 #'
 #' Remove words from a \code{\link[tm]{TermDocumentMatrix}}
 #' or \code{\link[tm]{DocumentTermMatrix}} not meeting a \code{\link[base]{rowSums}}/
-#' \code{\link[base]{colSums}} threshhold.
+#' \code{\link[base]{colSums}} threshold.
 #'
 #' @param x A \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.
-#' @param min A minimal threshhold that a words row/column must sum to.
+#' @param min A minimal threshold that a words row/column must sum to.
 #' @return Returns a \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.
 #' @export
 #' @examples

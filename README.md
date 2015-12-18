@@ -157,7 +157,7 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
-To filter out word counts below a threshhold...
+To filter out documents with word counts below a threshhold...
 
     (z <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))))
 
@@ -175,7 +175,7 @@ To filter out word counts below a threshhold...
     ## Maximal term length: 14
     ## Weighting          : term frequency (tf)
 
-To select only documents matching a regex...
+To filter out word counts below a threshhold...
 
 Remember the warning from above...Say good bye...
 
@@ -237,7 +237,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.2831 secs
+    ## Time difference of 6.813922 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
@@ -251,7 +251,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.486052 secs
+    ## Time difference of 1.514115 secs
 
 Here I include stemming:
 
@@ -280,7 +280,7 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.82943 secs
+    ## Time difference of 7.004719 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
@@ -294,4 +294,4 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.029729 secs
+    ## Time difference of 1.09792 secs

@@ -90,7 +90,7 @@ Examples
 ========
 
     library(gofastr)
-    (x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
+    (w <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
 
     ## <<DocumentTermMatrix (documents: 2912, terms: 3368)>>
     ## Non-/sparse entries: 37836/9769780
@@ -98,7 +98,7 @@ Examples
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
-    remove_stopwords(x)
+    remove_stopwords(w)
 
     ## <<DocumentTermMatrix (documents: 2912, terms: 3180)>>
     ## Non-/sparse entries: 19014/9241146
@@ -106,7 +106,7 @@ Examples
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
-    (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
+    (x <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 
     ## <<TermDocumentMatrix (terms: 3368, documents: 2912)>>
     ## Non-/sparse entries: 37836/9769780
@@ -114,7 +114,7 @@ Examples
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
-    remove_stopwords(y)
+    remove_stopwords(x)
 
     ## <<TermDocumentMatrix (terms: 3180, documents: 2912)>>
     ## Non-/sparse entries: 19014/9241146
@@ -124,9 +124,9 @@ Examples
 
 To change weighting...
 
-    tm::weightTfIdf(x)
+    tm::weightTfIdf(w)
 
-    ## Warning in tm::weightTfIdf(x): empty document(s): time 1_88.1 time 2_52.1
+    ## Warning in tm::weightTfIdf(w): empty document(s): time 1_88.1 time 2_52.1
 
     ## <<DocumentTermMatrix (documents: 2912, terms: 3368)>>
     ## Non-/sparse entries: 37836/9769780
@@ -137,7 +137,7 @@ To change weighting...
 To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
 **SnowballC**'s stemmer under the hood.
 
-    (z <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
+    (y <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
 
     ## <<DocumentTermMatrix (documents: 2912, terms: 2495)>>
     ## Non-/sparse entries: 37516/7227924
@@ -145,7 +145,7 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
-    remove_stopwords(z)
+    remove_stopwords(y)
 
     ## <<DocumentTermMatrix (documents: 2912, terms: 2334)>>
     ## Non-/sparse entries: 20170/6776438
@@ -221,7 +221,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.800418 secs
+    ## Time difference of 5.291432 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
@@ -235,7 +235,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.432013 secs
+    ## Time difference of 1.237876 secs
 
 Here I include stemming:
 
@@ -264,7 +264,7 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.098821 secs
+    ## Time difference of 6.713979 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
@@ -278,4 +278,4 @@ Here I include stemming:
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.099316 secs
+    ## Time difference of 1.054747 secs

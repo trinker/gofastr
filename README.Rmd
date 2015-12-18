@@ -59,24 +59,24 @@ You are welcome to:
 
 ```{r}
 library(gofastr)
-(x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
-remove_stopwords(x)
+(w <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
+remove_stopwords(w)
 
-(y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
-remove_stopwords(y)
+(x <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
+remove_stopwords(x)
 ```
 
 To change weighting...
 
 ```{r}
-tm::weightTfIdf(x)
+tm::weightTfIdf(w)
 ```
 
 To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize **SnowballC**'s stemmer under the hood.
 
 ```{r}
-(z <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
-remove_stopwords(z)
+(y <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
+remove_stopwords(y)
 ```
 
 To filter out word counts below a threshhold...

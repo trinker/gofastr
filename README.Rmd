@@ -47,7 +47,7 @@ Functions typically fall into the task category of matrix (1) creation & (2) man
 | `q_dtm` & `q_dtm_stem` | creation     | `DocumentTermMatrix` from string vector                                |
 | `remove_stopwords`     | manipulation | Remove stopwords and minimal character words from `TermDocumentMatrix`/`DocumentTermMatrix` |
 | `filter_words`         | manipulation | Filter words from `TermDocumentMatrix`/`DocumentTermMatrix`            |
-| `filter_tf_idf`        | manipulation | Filter low tf_idf words from `TermDocumentMatrix`/`DocumentTermMatrix` |
+| `filter_tf_idf`        | manipulation | Filter low tf-idf words from `TermDocumentMatrix`/`DocumentTermMatrix` |
 | `filter_documents`     | manipulation | Filter documents from a `TermDocumentMatrix`/`DocumentTermMatrix`      |
 | `select_documents`     | manipulation | Select documents from `TermDocumentMatrix`/`DocumentTermMatrix`        |
 
@@ -142,10 +142,10 @@ with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_")))
 
 To filter out documents with word counts below a threshold use `filter_documents`.  Remember the warning from above:
 
-> `Warning message:`
+> `Warning message:`    
 > `In tm::weightTfIdf(.) : empty document(s): time 1_88.1 time 2_52.1`
 
-Here we use `filter_documents`' default (a document must have a rox/column sum greater than 1) to eliminate the warning:
+Here we use `filter_documents`' default (a document must have a row/column sum greater than 1) to eliminate the warning:
 
 ```{r}
 with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>%
@@ -169,7 +169,7 @@ with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_")))
 
 Of course we can chain matrix creation functions with several of the manipulation function to quickly prepare data for analysis.  Here I demonstrate preparing data for a topic model using ***gofaster**  and then the analysis. Finally, I plot the results and use the **LDAvis** package to interact with the results:
 
-```{r, }
+```{r, fig.width=13, fig.heigh=8}
 pacman::p_load(tm, topicmodels, dplyr, tidyr, gofastr, devtools, LDAvis, ggplot2)
 
 ## Source topicmodels2LDAvis function
@@ -209,7 +209,8 @@ gather(topic_dat, Topic, Proportion, -c(Person_Time)) %>%
         geom_bar() +
         coord_flip() +
         facet_grid(Person~Time) +
-        guides(fill=FALSE)
+        guides(fill=FALSE) +
+        xlab("Proportion")
 ```
 
 ```{r, eval=FALSE}

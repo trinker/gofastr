@@ -83,7 +83,7 @@ summarized in the table below:
 <tr class="odd">
 <td align="left"><code>filter_tf_idf</code></td>
 <td align="left">manipulation</td>
-<td align="left">Filter low tf_idf words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+<td align="left">Filter low tf-idf words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
 </tr>
 <tr class="even">
 <td align="left"><code>filter_documents</code></td>
@@ -237,11 +237,11 @@ Manipulating Documents
 To filter out documents with word counts below a threshold use
 `filter_documents`. Remember the warning from above:
 
-> `Warning message:`
+> `Warning message:`  
 > `In tm::weightTfIdf(.) : empty document(s): time 1_88.1 time 2_52.1`
 
 Here we use `filter_documents`' default (a document must have a
-rox/column sum greater than 1) to eliminate the warning:
+row/column sum greater than 1) to eliminate the warning:
 
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>%
         filter_documents() %>%
@@ -326,7 +326,8 @@ package to interact with the results:
             geom_bar() +
             coord_flip() +
             facet_grid(Person~Time) +
-            guides(fill=FALSE)
+            guides(fill=FALSE) +
+            xlab("Proportion")
 
 ![](inst/figure/unnamed-chunk-12-1.png)
 
@@ -367,7 +368,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 7.104778 secs
+    ## Time difference of 5.648998 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
@@ -381,7 +382,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.680189 secs
+    ## Time difference of 1.414003 secs
 
 ### With Stemming
 
@@ -410,7 +411,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.947203 secs
+    ## Time difference of 7.798178 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
@@ -424,4 +425,4 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.874619 secs
+    ## Time difference of 0.8816311 secs

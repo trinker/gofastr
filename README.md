@@ -2,6 +2,9 @@ gofastr
 ============
 
 
+[![Project Status: Active - The project has reached a stable, usable
+state and is being actively
+developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build
 Status](https://travis-ci.org/trinker/gofastr.svg?branch=master)](https://travis-ci.org/trinker/gofastr)
 [![Coverage
@@ -14,11 +17,13 @@ Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](htt
 power of **data.table** and **stringi** to quickly generate **tm**
 `DocumentTermMatrix` and `TermDocumentMatrix` data structures.
 
-In my work I often get data in the form of large .csv files. The
-`Corpus` structure is an unnecessary step that requires additional run
-time. **gofastr** skips this step and uses **data.table** and
-**stringi** to quickly make the `DocumentTermMatrix` and
-`TermDocumentMatrix` data structures directly.
+In my work I often get data in the form of large .csv files.
+Additionally, most of the higher level analysis of text I undertake
+utilizes a TermDocumentMatrix or DocumentTermMatrix as the input data.
+Generally, the `Corpus` generation/structure is an unnecessary step that
+requires additional run time. **gofastr** skips this step and uses
+**data.table** and **stringi** to quickly make the `DocumentTermMatrix`
+or `TermDocumentMatrix` data structures directly.
 
 
 Table of Contents
@@ -33,13 +38,14 @@ Table of Contents
     -   [Stopwords](#stopwords)
     -   [Weighting](#weighting)
     -   [Stemming](#stemming)
-    -   [Manipulating Words](#manipulating-words)
+    -   [Manipulating via Words](#manipulating-via-words)
         -   [Filter Out Low Occurring Words](#filter-out-low-occurring-words)
-        -   [Filter Out High Frequency (low information) Words](#filter-out-high-frequency-(low-information)-words)
-    -   [Manipulating Documents](#manipulating-documents)
+        -   [Filter Out High/Low Frequency (low information) Words](#filter-out-highlow-frequency-(low-information)-words)
+    -   [Manipulating via Documents](#manipulating-via-documents)
         -   [Filter Out Low Occurring Documents](#filter-out-low-occurring-documents)
         -   [Selecting Documents](#selecting-documents)
     -   [Putting It Together](#putting-it-together)
+        -   [LDAvis of Model](#ldavis-of-model)
     -   [Comparing Timings](#comparing-timings)
         -   [With Stemming](#with-stemming)
 
@@ -47,9 +53,9 @@ Function Usage
 ============
 
 
-Functions typically fall into the task category of matrix (1) creation &
-(2) manipulating. The main functions, task category, & descriptions are
-summarized in the table below:
+Functions typically fall into the task category of matrix (1) *creation*
+& (2) *manipulating*. The main functions, task category, & descriptions
+are summarized in the table below:
 
 <table>
 <thead>
@@ -152,6 +158,20 @@ DocumentTerm/TermDocument Matrices
 Stopwords
 ---------
 
+Stopwords are those words that we want to remove from the analysis
+because they give little information gain. These words occur so
+frequently in all documents or give very content information (i.e.,
+function words) and thus are excluded. The `remove_stopwords` function
+allows the user to remove stopwords using three approaches/arguments:
+
+1.  `stopwords` - A vector of common + resercher defined words
+2.  `min.char`/`max.char` - Automatic removal of words less/greater than
+    n characters in length
+3.  `denumber` - Removal of words that are numbers
+
+By default `stopwords = tm::stopwords("english")`, `min.char = 3`, and
+`denumber =TRUE`.
+
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>%
         remove_stopwords()
 
@@ -172,6 +192,10 @@ Stopwords
 
 Weighting
 ---------
+
+As the output from **gofastr** matrix create functions is a true **tm**
+object, weighting is done in the standard way using **tm**'s built in
+weighting functions. This is done post-hoc of creation.
 
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>%
         tm::weightTfIdf()
@@ -199,8 +223,8 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
-Manipulating Words
-------------------
+Manipulating via Words
+----------------------
 
 ### Filter Out Low Occurring Words
 
@@ -215,29 +239,34 @@ To filter out words with counts below a threshold we use `filter_words`.
     ## Maximal term length: 14
     ## Weighting          : term frequency (tf)
 
-### Filter Out High Frequency (low information) Words
+### Filter Out High/Low Frequency (low information) Words
 
-To filter out words with high frequency in all documents (thus low
-informaton) use `filter_tf_idf`.
+To filter out words with high/low frequency in all documents (thus low
+information) use `filter_tf_idf`. The default `min` uses the *tf-idf*'s
+median per Grüen & Hornik's (2011) demonstration.
 
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
-        filter_tf_idf(.002)
+        filter_tf_idf()
 
-    ## <<DocumentTermMatrix (documents: 10, terms: 233)>>
-    ## Non-/sparse entries: 347/1983
-    ## Sparsity           : 85%
-    ## Maximal term length: 14
+    ## <<DocumentTermMatrix (documents: 10, terms: 1684)>>
+    ## Non-/sparse entries: 4008/12832
+    ## Sparsity           : 76%
+    ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
-Manipulating Documents
-----------------------
+\*Grüen, B. & Hornik, K. (2011). topicmodels: An R Package for Fitting
+Topic Models. *Journal of Statistical Software*, 40(13), 1-30.
+<http://www.jstatsoft.org/article/view/v040i13/v40i13.pdf>
+
+Manipulating via Documents
+--------------------------
 
 ### Filter Out Low Occurring Documents
 
 To filter out documents with word counts below a threshold use
 `filter_documents`. Remember the warning from above:
 
-> `Warning message:`  
+> `Warning message:` <br>  
 > `In tm::weightTfIdf(.) : empty document(s): time 1_88.1 time 2_52.1`
 
 Here we use `filter_documents`' default (a document must have a
@@ -256,7 +285,8 @@ row/column sum greater than 1) to eliminate the warning:
 ### Selecting Documents
 
 To select only documents matching a regex use the `select_documents`
-function.
+function. This is useful for selecting only particular documents within
+the corpus.
 
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         select_documents('romney', ignore.case=TRUE)
@@ -281,7 +311,7 @@ Putting It Together
 
 Of course we can chain matrix creation functions with several of the
 manipulation function to quickly prepare data for analysis. Here I
-demonstrate preparing data for a topic model using **gofaster** and then
+demonstrate preparing data for a topic model using **gofastr** and then
 the analysis. Finally, I plot the results and use the **LDAvis** package
 to interact with the results. Note that this is meant to demonstrate the
 types of analysis that **gofastr** may be of use to; the methods and
@@ -296,7 +326,7 @@ parameters/hyper-parameters are selected with little regard to analysis.
 
     data(presidential_debates_2012)
 
-    # Generate Stopwords 
+    ## Generate Stopwords 
     stops <- c(
             tm::stopwords("english"),
             "governor", "president", "mister", "obama","romney"
@@ -306,8 +336,8 @@ parameters/hyper-parameters are selected with little regard to analysis.
     ## Create the DocumentTermMatrix
     doc_term_mat <- pres_debates2012 %>%
         with(q_dtm_stem(dialogue, paste(person, time, sep = "_"))) %>%           
-        remove_stopwords(stops, min.char = 3, stem = TRUE, denumber = TRUE)%>%                                                     
-        filter_tf_idf(.001) %>%
+        remove_stopwords(stops) %>%                                                    
+        filter_tf_idf() %>%
         filter_words(4) %>%                       
         filter_documents() 
 
@@ -333,7 +363,12 @@ parameters/hyper-parameters are selected with little regard to analysis.
 
 ![](inst/figure/unnamed-chunk-12-1.png)
 
-    ## LDAvis of Model
+### LDAvis of Model
+
+The output from **LDAvis** is not easily embedded within an R markdown
+document, thus the reader will need to run the code below to interact
+with the results.
+
     lda_model %>%
         topicmodels2LDAvis() %>%
         LDAvis::serVis()
@@ -342,11 +377,14 @@ Comparing Timings
 -----------------
 
 On a smaller 2912 rows these are the time comparisons between
-**gofastr** and **tm** using `Sys.time`:
+**gofastr** and **tm** using `Sys.time`. Notice the **gofaster** runs
+faster (the creation of a corpus is expensive) and requires
+significantly less code.
 
     pacman::p_load(gofastr, tm)
-
     pd <- presidential_debates_2012
+
+    ## tm Timing
     tic <- Sys.time()
     rownames(pd) <- paste("docs", 1:nrow(pd))
     pd[['groups']] <- with(pd, paste(time, tot, sep = "_"))
@@ -370,8 +408,9 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.018258 secs
+    ## Time difference of 5.710601 secs
 
+    ## gofastr Timing
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
     remove_stopwords(x)
@@ -384,11 +423,14 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.595139 secs
+    ## Time difference of 1.146823 secs
 
 ### With Stemming
 
+    pacman::p_load(gofastr, tm)
     pd <- presidential_debates_2012
+
+    ## tm Timing
     tic <- Sys.time()
     rownames(pd) <- paste("docs", 1:nrow(pd))
     pd[['groups']] <- with(pd, paste(time, tot, sep = "_"))
@@ -413,8 +455,9 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 7.365637 secs
+    ## Time difference of 6.11833 secs
 
+    ## gofastr Timing
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
     remove_stopwords(x, stem=TRUE)
@@ -427,4 +470,4 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.062285 secs
+    ## Time difference of 1.105782 secs

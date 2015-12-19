@@ -4,12 +4,16 @@
 \alias{filter_tf_idf}
 \title{Remove Words Below a TF-IDF Threshold from a TermDocumentMatrix/DocumentTermMatrix}
 \usage{
-filter_tf_idf(x, min = 0.002)
+filter_tf_idf(x, min = NULL, verbose = FALSE)
 }
 \arguments{
 \item{x}{A \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.}
 
-\item{min}{A minimal threshold that a word tf-idf must exceed.}
+\item{min}{A minimal threshold that a word tf-idf must exceed.  If \code{min = NULL}
+the median of the tf-idf will be used.}
+
+\item{verbose}{logical.  If \code{TRUE} the summary stats from the tf-idf are
+printed.  This can be useful for exploration and setting the \code{min} value.}
 }
 \value{
 Returns a \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.
@@ -24,9 +28,11 @@ words do not carry much information.
 }
 \examples{
 (x <-with(presidential_debates_2012, q_dtm(dialogue, paste(person, time, sep = "_"))))
-filter_tf_idf(x, .001)
+filter_tf_idf(x)
+filter_tf_idf(x, .5)
+filter_tf_idf(x, verbose=TRUE)
 (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(person, time, sep = "_"))))
-filter_tf_idf(y, .001)
+filter_tf_idf(y)
 }
 \author{
 Bettina Gr\"{u}n, Kurt Hornik, and Tyler Rinker <tyler.rinker@gmail.com>.
@@ -34,6 +40,6 @@ Bettina Gr\"{u}n, Kurt Hornik, and Tyler Rinker <tyler.rinker@gmail.com>.
 \references{
 Bettina Gruen & Kurt Hornik (2011). topicmodels: An R Package for
 Fitting Topic Models. Journal of Statistical Software, 40(13), 1-30.
-\url{file:///C:/Users/Tyler/Downloads/v40i13.pdf}
+\url{http://www.jstatsoft.org/article/view/v040i13/v40i13.pdf}
 }
 

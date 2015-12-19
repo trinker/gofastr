@@ -169,7 +169,7 @@ with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_")))
 
 Of course we can chain matrix creation functions with several of the manipulation function to quickly prepare data for analysis.  Here I demonstrate preparing data for a topic model using ***gofaster**  and then the analysis. Finally, I plot the results and use the **LDAvis** package to interact with the results:
 
-```{r, fig.width=10, fig.heigh=18}
+```{r, fig.width=10, fig.height=10}
 pacman::p_load(tm, topicmodels, dplyr, tidyr, gofastr, devtools, LDAvis, ggplot2)
 
 ## Source topicmodels2LDAvis function

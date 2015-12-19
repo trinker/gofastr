@@ -281,9 +281,11 @@ Putting It Together
 
 Of course we can chain matrix creation functions with several of the
 manipulation function to quickly prepare data for analysis. Here I
-demonstrate preparing data for a topic model using \***gofaster** and
-then the analysis. Finally, I plot the results and use the **LDAvis**
-package to interact with the results:
+demonstrate preparing data for a topic model using **gofaster** and then
+the analysis. Finally, I plot the results and use the **LDAvis** package
+to interact with the results. Note that this is meant to demonstrate the
+types of analysis that **gofastr** may be of use to; the methods and
+parameters/hyper-parameters are selected with little regard to analysis.
 
     pacman::p_load(tm, topicmodels, dplyr, tidyr, gofastr, devtools, LDAvis, ggplot2)
 
@@ -368,7 +370,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.809845 secs
+    ## Time difference of 6.018258 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
@@ -382,7 +384,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.601119 secs
+    ## Time difference of 1.595139 secs
 
 ### With Stemming
 
@@ -411,7 +413,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 7.005684 secs
+    ## Time difference of 7.365637 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
@@ -425,4 +427,4 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.879642 secs
+    ## Time difference of 1.062285 secs

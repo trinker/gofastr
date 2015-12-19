@@ -368,7 +368,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 7.749673 secs
+    ## Time difference of 7.911129 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
@@ -382,7 +382,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.285922 secs
+    ## Time difference of 1.693199 secs
 
 ### With Stemming
 
@@ -411,7 +411,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 7.712895 secs
+    ## Time difference of 7.571563 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
@@ -425,4 +425,4 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.034335 secs
+    ## Time difference of 0.9746881 secs

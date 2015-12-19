@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_documents.R
 \name{filter_documents}
 \alias{filter_documents}
-\title{Remove Documents Below a Threshold TermDocumentMatrix/DocumentTermMatrix}
+\title{Remove Documents Below a Threshold from a TermDocumentMatrix/DocumentTermMatrix}
 \usage{
 filter_documents(x, min = 1)
 }

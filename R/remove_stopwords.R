@@ -1,7 +1,7 @@
 #' Remove Stopwords from a TermDocumentMatrix/DocumentTermMatrix
 #'
-#' Remove stopwords and < nchar words from a \code{\link[tm]{TermDocumentMatrix}}
-#' or \code{\link[tm]{DocumentTermMatrix}}.
+#' \code{remove_stopwords} - Remove stopwords and < nchar words from a
+#' \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.
 #'
 #' @param x A \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.
 #' @param stopwords A vector of stopwords to remove.
@@ -9,14 +9,18 @@
 #' @param max.char The maximum length character for retained words.
 #' @param stem Logical.  If \code{TRUE} the \code{stopwords} will be stemmed.
 #' @param denumber Logical.  If \code{TRUE} numbers will be excluded.
+#' @param \dots \code{\link[base]{vector}}s of words.
 #' @return Returns a \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.
 #' @keywords stopwords
+#' @rdname remove_stopwords
 #' @export
 #' @examples
 #' (x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
 #' remove_stopwords(x)
 #' (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 #' remove_stopwords(y)
+#'
+#' prep_stopwords("the", "ChIcken", "Hello", tm::stopwords("english"), c("John", "Josh"))
 remove_stopwords  <- function(x, stopwords = tm::stopwords("english"),
     min.char = 3, max.char = NULL, stem = FALSE, denumber = TRUE) {
 
@@ -67,3 +71,15 @@ remove_stopwords.DocumentTermMatrix  <- function(x, stopwords = tm::stopwords("e
 }
 
 regex_pattern <-"(?<=^| )[-.]*\\d+(?:\\.\\d+)?(?= |\\.?$)|\\d+(?:,\\d{3})+(\\.\\d+)*"
+
+
+#' Remove Stopwords from a TermDocumentMatrix/DocumentTermMatrix
+#'
+#' \code{prep_stopwords} - Join multiple vectors of words, convert to lower case,
+#' and return sorted uniue words.
+#'
+#' @rdname remove_stopwords
+#' @export
+prep_stopwords <- function(...){
+    sort(unique(tolower(unlist(list(...)))))
+}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_words.R
 \name{filter_words}
 \alias{filter_words}
-\title{Remove Words Below a Threshold TermDocumentMatrix/DocumentTermMatrix}
+\title{Remove Words Below a Threshold from a TermDocumentMatrix/DocumentTermMatrix}
 \usage{
 filter_words(x, min = 1)
 }

@@ -6,6 +6,7 @@ output:
     toc: true      
 ---
 
+
 ```{r, echo=FALSE}
 desc <- suppressWarnings(readLines("DESCRIPTION"))
 regex <- "(^Version:\\s+)(\\d+\\.\\d+\\.\\d+)"
@@ -18,6 +19,17 @@ verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg
 [![Coverage Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](https://coveralls.io/r/trinker/gofastr?branch=master)
 `r verbadge`
 
+```{r, echo=FALSE, message=FALSE}
+library(knitr)
+knit_hooks$set(htmlcap = function(before, options, envir) {
+  if(!before) {
+    paste('<p class="caption"><b><em>',options$htmlcap,"</em></b></p>",sep="")
+    }
+    })
+knitr::opts_knit$set(self.contained = TRUE, cache = FALSE)
+knitr::opts_chunk$set(fig.path = "inst/figure/")
+```
+
 <img src="inst/gofastr_logo/r_gofastr.png" width="150" alt="readability Logo">  
 
 
@@ -25,16 +37,19 @@ verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg
 
 In my work I often get data in the form of large .csv files.  The `Corpus` structure is an unnecessary step that requires additional run time.  **gofastr** skips this step and uses **data.table** and **stringi** to quickly make the `DocumentTermMatrix` and `TermDocumentMatrix` data structures directly.  
 
-There are six functions:
+# Function Usage
 
-| Function           |  Description                                          |
-|--------------------|-------------------------------------------------------|
-| `q_tdm` & `q_tdm_stem`            | `TermDocumentMatrix` from string vector |
-| `q_dtm` & `q_dtm_stem`           | `DocumentTermMatrix` from string vector |
-| `remove_stopwords` | Remove stopwords and minimal character words from `TermDocumentMatrix`/`DocumentTermMatrix` |
-| `filter_words` | Filter words from `TermDocumentMatrix`/`DocumentTermMatrix` |
-| `filter_documents` | Filter documents from a `TermDocumentMatrix`/`DocumentTermMatrix` |
-| `select_documents` | Select documents from `TermDocumentMatrix`/`DocumentTermMatrix` |
+Functions typically fall into the task category of matrix (1) creation & (2) manipulating.  The main functions, task category, & descriptions are summarized in the table below:
+
+| Function               |  Category    | Description                                                            |
+|------------------------|--------------|------------------------------------------------------------------------|
+| `q_tdm` & `q_tdm_stem` | creation     | `TermDocumentMatrix` from string vector                                |
+| `q_dtm` & `q_dtm_stem` | creation     | `DocumentTermMatrix` from string vector                                |
+| `remove_stopwords`     | manipulation | Remove stopwords and minimal character words from `TermDocumentMatrix`/`DocumentTermMatrix` |
+| `filter_words`         | manipulation | Filter words from `TermDocumentMatrix`/`DocumentTermMatrix`            |
+| `filter_tf_idf`        | manipulation | Filter low tf_idf words from `TermDocumentMatrix`/`DocumentTermMatrix` |
+| `filter_documents`     | manipulation | Filter documents from a `TermDocumentMatrix`/`DocumentTermMatrix`      |
+| `select_documents`     | manipulation | Select documents from `TermDocumentMatrix`/`DocumentTermMatrix`        |
 
 
 # Installation
@@ -56,49 +71,154 @@ You are welcome to:
 * compose a friendly e-mail to: <tyler.rinker@gmail.com>
 
 
-# Examples
+# Demonstration
+
+## Load Packages
 
 ```{r}
-library(gofastr)
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(gofastr, tm, magrittr)
+```
+
+## DocumentTerm/TermDocument Matrices
+
+```{r}
 (w <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
-remove_stopwords(w)
-
 (x <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
-remove_stopwords(x)
 ```
 
-To change weighting...
+
+## Stopwords
 
 ```{r}
-tm::weightTfIdf(w)
+with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>%
+    remove_stopwords()
+
+with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))) %>%
+    remove_stopwords()
 ```
+
+## Weighting
+
+```{r}
+with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>%
+    tm::weightTfIdf()
+```
+
+
+## Stemming
 
 To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize **SnowballC**'s stemmer under the hood.
 
 ```{r}
-(y <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
-remove_stopwords(y)
+with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))) %>%
+    remove_stopwords()
 ```
 
-To filter out words with counts below a threshold...
+
+## Manipulating Words 
+
+### Filter Out Low Occurring Words
+
+To filter out words with counts below a threshold we use `filter_words`.
 
 ```{r}
-(z <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))))
-filter_words(z, 5)
+with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
+    filter_words(5)
 ```
 
-To filter out documents with word counts below a threshold...
-Remember the warning from above...Say good bye...
-```{r}
-tm::weightTfIdf(filter_documents(w))
-```
+### Filter Out High Frequency (low information) Words
 
-To select only documents matching a regex...
+To filter out words with high frequency in all documents (thus low informaton) use  `filter_tf_idf`.
 
 ```{r}
-select_documents(z, 'romney', ignore.case=TRUE)
-select_documents(z, '^(?!.*romney).*$', ignore.case = TRUE)
+with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
+    filter_tf_idf(.002)
 ```
+
+## Manipulating Documents 
+
+### Filter Out Low Occurring Documents 
+
+To filter out documents with word counts below a threshold use `filter_documents`.  Remember the warning from above:
+
+> `Warning message:`
+> `In tm::weightTfIdf(.) : empty document(s): time 1_88.1 time 2_52.1`
+
+Here we use `filter_documents`' default (a document must have a rox/column sum greater than 1) to eliminate the warning:
+
+```{r}
+with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>%
+    filter_documents() %>%
+    tm::weightTfIdf()
+```
+
+### Selecting Documents
+
+To select only documents matching a regex use the `select_documents` function.
+
+```{r}
+with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
+    select_documents('romney', ignore.case=TRUE)
+
+with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
+    select_documents('^(?!.*romney).*$', ignore.case = TRUE)
+```
+
+## Putting It Together
+
+Of course we can chain matrix creation functions with several of the manipulation function to quickly prepare data for analysis.  Here I demonstrate preparing data for a topic model using ***gofaster**  and then the analysis. Finally, I plot the results and use the **LDAvis** package to interact with the results:
+
+```{r, }
+pacman::p_load(tm, topicmodels, dplyr, tidyr, gofastr, devtools, LDAvis, ggplot2)
+
+## Source topicmodels2LDAvis function
+devtools::source_url("https://gist.githubusercontent.com/trinker/477d7ae65ff6ca73cace/raw/79dbc9d64b17c3c8befde2436fdeb8ec2124b07b/topicmodels2LDAvis")
+
+data(presidential_debates_2012)
+
+# Generate stop words based on short words, frequent words and contractions
+stops <- c(
+        tm::stopwords("english"),
+        "governor", "president", "mister", "obama","romney"
+    ) %>%
+    prep_stopwords() 
+
+## Create the DocumentTermMatrix
+doc_term_mat <- pres_debates2012 %>%
+    with(q_dtm_stem(dialogue, paste(person, time, sep = "_"))) %>%           
+    remove_stopwords(stops, min.char = 3, stem = TRUE, denumber = TRUE)%>%                                                     
+    filter_tf_idf(.001) %>%
+    filter_words(4) %>%                       
+    filter_documents() 
+
+## Run the Model
+lda_model <- topicmodels::LDA(doc_term_mat, 10)
+
+## Plot the Topics Per Person_Time
+topics <- posterior(lda_model, doc_term_mat)$topics
+topic_dat <- add_rownames(as.data.frame(topics), "Person_Time")
+colnames(topic_dat)[-1] <- apply(terms(lda_model, 10), 2, paste, collapse = ", ")
+
+gather(topic_dat, Topic, Proportion, -c(Person_Time)) %>%
+    separate(Person_Time, c("Person", "Time"), sep = "_") %>%
+    mutate(Person = factor(Person, 
+        levels = c("OBAMA", "ROMNEY", "LEHRER", "SCHIEFFER", "CROWLEY", "QUESTION" ))
+    ) %>%
+    ggplot(aes(weight=Proportion, x=Topic, fill=Topic)) +
+        geom_bar() +
+        coord_flip() +
+        facet_grid(Person~Time) +
+        guides(fill=FALSE)
+```
+
+```{r, eval=FALSE}
+## LDAvis of Model
+lda_model %>%
+    topicmodels2LDAvis() %>%
+    LDAvis::serVis()
+```
+
 
 
 ## Comparing Timings
@@ -131,7 +251,7 @@ remove_stopwords(x)
 difftime(Sys.time(), tic)
 ```
 
-Here I include stemming:
+### With Stemming
 
 ```{r}
 pd <- presidential_debates_2012

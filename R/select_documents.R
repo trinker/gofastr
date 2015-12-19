@@ -1,4 +1,4 @@
-#' Select Documents TermDocumentMatrix/DocumentTermMatrix
+#' Select Documents rom a TermDocumentMatrix/DocumentTermMatrix
 #'
 #' Select documents from a \code{\link[tm]{TermDocumentMatrix}}
 #' or \code{\link[tm]{DocumentTermMatrix}} matching a regular expression.

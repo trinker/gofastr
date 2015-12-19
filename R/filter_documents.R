@@ -1,4 +1,4 @@
-#' Remove Documents Below a Threshold TermDocumentMatrix/DocumentTermMatrix
+#' Remove Documents Below a Threshold from a TermDocumentMatrix/DocumentTermMatrix
 #'
 #' Remove documents from a \code{\link[tm]{TermDocumentMatrix}}
 #' or \code{\link[tm]{DocumentTermMatrix}} not meeting a \code{\link[base]{rowSums}}/

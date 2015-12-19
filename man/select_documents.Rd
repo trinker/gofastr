@@ -2,7 +2,7 @@
 % Please edit documentation in R/select_documents.R
 \name{select_documents}
 \alias{select_documents}
-\title{Select Documents TermDocumentMatrix/DocumentTermMatrix}
+\title{Select Documents rom a TermDocumentMatrix/DocumentTermMatrix}
 \usage{
 select_documents(x, pattern, ...)
 }

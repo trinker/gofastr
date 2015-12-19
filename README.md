@@ -294,7 +294,7 @@ package to interact with the results:
 
     data(presidential_debates_2012)
 
-    # Generate stop words based on short words, frequent words and contractions
+    # Generate Stopwords 
     stops <- c(
             tm::stopwords("english"),
             "governor", "president", "mister", "obama","romney"
@@ -368,7 +368,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.648998 secs
+    ## Time difference of 7.749673 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_")))
@@ -382,7 +382,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.414003 secs
+    ## Time difference of 1.285922 secs
 
 ### With Stemming
 
@@ -411,7 +411,7 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 7.798178 secs
+    ## Time difference of 7.712895 secs
 
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
@@ -425,4 +425,4 @@ On a smaller 2912 rows these are the time comparisons between
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.8816311 secs
+    ## Time difference of 1.034335 secs

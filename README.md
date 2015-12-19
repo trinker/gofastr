@@ -266,8 +266,7 @@ Manipulating via Documents
 To filter out documents with word counts below a threshold use
 `filter_documents`. Remember the warning from above:
 
-> `Warning message:` <br>  
-> `In tm::weightTfIdf(.) : empty document(s): time 1_88.1 time 2_52.1`
+> `Warning message:`<br>`In tm::weightTfIdf(.) : empty document(s): time 1_88.1 time 2_52.1`
 
 Here we use `filter_documents`' default (a document must have a
 row/column sum greater than 1) to eliminate the warning:
@@ -408,7 +407,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.710601 secs
+    ## Time difference of 5.573452 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -423,7 +422,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.146823 secs
+    ## Time difference of 1.129797 secs
 
 ### With Stemming
 
@@ -455,7 +454,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.11833 secs
+    ## Time difference of 6.371552 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -470,4 +469,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.105782 secs
+    ## Time difference of 0.9026341 secs

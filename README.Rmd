@@ -155,8 +155,7 @@ with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_")))
 
 To filter out documents with word counts below a threshold use `filter_documents`.  Remember the warning from above:
 
-> `Warning message:`   <br>    
-> `In tm::weightTfIdf(.) : empty document(s): time 1_88.1 time 2_52.1`
+> `Warning message:`<br>`In tm::weightTfIdf(.) : empty document(s): time 1_88.1 time 2_52.1`
 
 Here we use `filter_documents`' default (a document must have a row/column sum greater than 1) to eliminate the warning:
 

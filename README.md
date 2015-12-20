@@ -333,7 +333,7 @@ parameters/hyper-parameters are selected with little regard to analysis.
         prep_stopwords() 
 
     ## Create the DocumentTermMatrix
-    doc_term_mat <- pres_debates2012 %>%
+    doc_term_mat <- presidential_debates_2012 %>%
         with(q_dtm_stem(dialogue, paste(person, time, sep = "_"))) %>%           
         remove_stopwords(stops) %>%                                                    
         filter_tf_idf() %>%
@@ -341,7 +341,7 @@ parameters/hyper-parameters are selected with little regard to analysis.
         filter_documents() 
 
     ## Run the Model
-    lda_model <- topicmodels::LDA(doc_term_mat, 10)
+    lda_model <- topicmodels::LDA(doc_term_mat, 10, control = list(seed=100))
 
     ## Plot the Topics Per Person_Time
     topics <- posterior(lda_model, doc_term_mat)$topics
@@ -407,7 +407,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.573452 secs
+    ## Time difference of 6.870893 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -422,7 +422,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 1.129797 secs
+    ## Time difference of 1.462083 secs
 
 ### With Stemming
 
@@ -454,7 +454,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.371552 secs
+    ## Time difference of 7.337727 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -469,4 +469,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.9026341 secs
+    ## Time difference of 1.364971 secs

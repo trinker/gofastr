@@ -24,6 +24,8 @@ gofastr 0.1.0
 
 **NEW FEATURES**
 
+* `partial_republican_debates_2015` data set added.
+
 **MINOR FEATURES**
 
 IMPROVEMENTS

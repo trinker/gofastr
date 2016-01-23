@@ -5,8 +5,7 @@
 \alias{q_dtm_stem}
 \title{Quick DocumentTermMatrix}
 \usage{
-q_dtm(text, docs = seq_along(text), to = "tm", regex = "^[^A-Za-z]*$",
-  ...)
+q_dtm(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, ...)
 
 q_dtm_stem(text, docs = seq_along(text), to = "tm",
   regex = "^[^A-Za-z]*$", ...)
@@ -27,7 +26,9 @@ whose document-term matrix representation the dfm will be converted:
 \item{\code{"topicmodels"}}{the "dtm" format as used by the \pkg{topicmodels} package}
 }}
 
-\item{regex}{A regex to match strings in a vector.}
+\item{keep.hyphen}{logical.  If \code{TRUE} hyphens are retained in the terms
+(e.g., "math-like" is kept as "math-like"), otherwise they become a split for
+terms (e.g., "math-like" is converted to "math" & "like").}
 
 \item{\ldots}{Additional arguments passed to \code{\link[quanteda]{dfm}}.}
 }

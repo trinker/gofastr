@@ -4,7 +4,7 @@ Version: 0.1.0
 Authors@R: c(person("Tyler", "Rinker", email =
         "tyler.rinker@gmail.com", role = c("aut", "cre")))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
-Description: Harness the power of 'data.table' and 'stringi' to quickly
+Description: Harness the power of 'quanteda', 'data.table' & 'stringi' to quickly
         generate 'tm' DocumentTermMatrix and TermDocumentMatrix data
         structures.
 Depends: R (>= 3.2.2)

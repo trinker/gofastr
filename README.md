@@ -21,9 +21,10 @@ In my work I often get data in the form of large .csv files.
 Additionally, most of the higher level analysis of text I undertake
 utilizes a TermDocumentMatrix or DocumentTermMatrix as the input data.
 Generally, the `Corpus` generation/structure is an unnecessary step that
-requires additional run time. **gofastr** skips this step and uses
-**data.table** and **stringi** to quickly make the `DocumentTermMatrix`
-or `TermDocumentMatrix` data structures directly.
+requires additional run time. **gofastr** skips this step and uses the
+power of [**quanteda**](https://github.com/kbenoit/quanteda) (which in
+turn wraps **data.table**, **stringi**, **Matrix**) to quickly make the
+`DocumentTermMatrix` or `TermDocumentMatrix` data structures directly.
 
 
 Table of Contents
@@ -105,6 +106,11 @@ are summarized in the table below:
 <td align="left"><code>select_documents</code></td>
 <td align="left">manipulation</td>
 <td align="left">Select documents from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>sub_in_na</code></td>
+<td align="left">manipulation</td>
+<td align="left">Sub missing (<code>NA</code>) for regex matches (defaut: non-content elements)</td>
 </tr>
 </tbody>
 </table>
@@ -412,7 +418,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.614983 secs
+    ## Time difference of 6.127912 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -427,7 +433,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1100779 secs
+    ## Time difference of 0.1100819 secs
 
 ### With Stemming
 
@@ -459,7 +465,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.995261 secs
+    ## Time difference of 6.021252 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -474,4 +480,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1140821 secs
+    ## Time difference of 0.11408 secs

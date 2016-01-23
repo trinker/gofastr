@@ -7,9 +7,9 @@
 \alias{package-gofastr}
 \title{Fast DocumentTermMatrix and TermDocumentMatric Creation}
 \description{
-This package does one thing...It harness the power of \pkg{data.table} and
-\pkg{stringi} to quickly generate \pkg{tm} \code{\link[tm]{TermDocumentMatrix}}
-and \code{\link[tm]{DocumentTermMatrix}} data structures without creating a
-\code{\link[tm]{Corpus}} first.
+This package does one thing...It harness the power of \pkg{quanteda},
+\pkg{data.table} & \pkg{stringi} to quickly generate \pkg{tm}
+\code{\link[tm]{TermDocumentMatrix}} & \code{\link[tm]{DocumentTermMatrix}}
+data structures without creating a \code{\link[tm]{Corpus}} first.
 }
 

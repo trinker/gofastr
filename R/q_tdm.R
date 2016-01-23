@@ -17,7 +17,9 @@
 #' \item{\code{"austin"}}{the \code{wfm} format from the \strong{austin} package}
 #' \item{\code{"topicmodels"}}{the "dtm" format as used by the \pkg{topicmodels} package}
 #' }
-#' @param regex A regex to match strings in a vector.
+#' @param keep.hyphen logical.  If \code{TRUE} hyphens are retained in the terms
+#' (e.g., "math-like" is kept as "math-like"), otherwise they become a split for
+#' terms (e.g., "math-like" is converted to "math" & "like").
 #' @param \ldots Additional arguments passed to \code{\link[quanteda]{dfm}}
 #' @keywords tdm TermDocumentMatrix
 #' @importFrom data.table :=
@@ -29,18 +31,18 @@
 #'
 #' (x2 <- with(presidential_debates_2012, q_tdm_stem(dialogue, paste(time, tot, sep = "_"))))
 #' remove_stopwords(x2, stem=TRUE)
-q_tdm <- function(text, docs = seq_along(text), to = "tm", regex = "^[^A-Za-z]*$", ...){
+q_tdm <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, ...){
 
-    t(q_dtm(text = text, docs = docs, to = to, regex = regex, ...))
+    t(q_dtm(text = text, docs = docs, to = to, keep.hyphen = keep.hyphen, ...))
 
 }
 
 
 #' @export
 #' @rdname q_tdm
-q_tdm_stem <- function(text, docs = seq_along(text), to = "tm", regex = "^[^A-Za-z]*$", ...){
+q_tdm_stem <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, ...){
 
-    t(q_dtm_stem(text = text, docs = docs, to = to, regex = regex, ...))
+    t(q_dtm_stem(text = text, docs = docs, to = to, keep.hyphen = keep.hyphen, ...))
 
 }
 

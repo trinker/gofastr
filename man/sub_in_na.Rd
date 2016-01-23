@@ -17,7 +17,7 @@ sub_in_na(x, regex = "^[^A-Za-z]*$", ...)
 Returns a vector with \code{NA}s inserted.
 }
 \description{
-USe a regex to identify elements to sub out for missing \code{NA}.  USeful 
+USe a regex to identify elements to sub out for missing \code{NA}.  USeful
 within a \pkg{magrittr} pipeline.
 }
 \examples{

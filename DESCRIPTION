@@ -9,8 +9,8 @@ Description: Harness the power of 'data.table' and 'stringi' to quickly
         structures.
 Depends: R (>= 3.2.2)
 Suggests: testthat
-Imports: data.table (>= 1.9.5), slam, SnowballC, stringi, tm
-Date: 2015-12-20
+Imports: data.table (>= 1.9.5), quanteda, slam, SnowballC, tm
+Date: 2016-01-22
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)

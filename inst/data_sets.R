@@ -19,6 +19,6 @@ partial_republican_debates_2015 <- lapply(debates, function(x){
         textshape::split_sentence()
 }) %>%
     textshape::bind_list("location") %>%
-    qdapRegex::rm_non_ascii()
+    dplyr::mutate(dialogue = qdapRegex::rm_non_ascii(dialogue))
 
 

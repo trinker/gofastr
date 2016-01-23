@@ -5,23 +5,31 @@
 \alias{q_dtm_stem}
 \title{Quick DocumentTermMatrix}
 \usage{
-q_dtm(text, docs = seq_along(text), weighting = tm::weightTf, ...)
+q_dtm(text, docs = seq_along(text), to = "tm", regex = "^[^A-Za-z]*$",
+  ...)
 
-q_dtm_stem(text, docs = seq_along(text), weighting = tm::weightTf,
-  language = "porter", ...)
+q_dtm_stem(text, docs = seq_along(text), to = "tm",
+  regex = "^[^A-Za-z]*$", ...)
 }
 \arguments{
 \item{text}{A vector of strings.}
 
-\item{docs}{An optional vector of document names.}
+\item{docs}{A vector of document names.}
 
-\item{weighting}{A \pkg{tm} weighting: \code{\link[tm]{weightTf}},
-\code{\link[tm]{weightTfIdf}}, \code{\link[tm]{weightBin}}, or
-\code{\link[tm]{weightSMART}}.}
+\item{to}{target conversion format, consisting of the name of the package into
+whose document-term matrix representation the dfm will be converted:
+\describe{
+\item{\code{"lda"}}{a list with components "documents" and "vocab" as needed by
+\code{lda.collapsed.gibbs.sampler} from the \pkg{lda} package}
+\item{\code{"tm"}}{a \link[tm]{DocumentTermMatrix} from the \pkg{tm} package}
+\item{\code{"stm"}}{the  format for the \pkg{stm} package}
+\item{\code{"austin"}}{the \code{wfm} format from the \strong{austin} package}
+\item{\code{"topicmodels"}}{the "dtm" format as used by the \pkg{topicmodels} package}
+}}
 
-\item{language}{The name of a recognized language (see \code{\link[SnowballC]{wordStem}}).}
+\item{regex}{A regex to match strings in a vector.}
 
-\item{\ldots}{Additional arguments passed to \code{\link[tm]{as.DocumentTermMatrix}}.}
+\item{\ldots}{Additional arguments passed to \code{\link[quanteda]{dfm}}.}
 }
 \value{
 Returns a \code{\link[tm]{DocumentTermMatrix}}.
@@ -38,6 +46,10 @@ tm::weightTfIdf(x)
 
 (x2 <- with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
 remove_stopwords(x2, stem=TRUE)
+}
+\seealso{
+\code{\link[quanteda]{dfm}},
+\code{\link[quanteda]{convert}}
 }
 \keyword{DocumentTermMatrix}
 \keyword{dtm}

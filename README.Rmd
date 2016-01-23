@@ -81,6 +81,7 @@ if (!require("pacman")) install.packages("pacman")
 pacman::p_load(gofastr, tm, magrittr)
 ```
 
+
 ## DocumentTerm/TermDocument Matrices
 
 ```{r}
@@ -106,6 +107,7 @@ with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>
 with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))) %>%
     remove_stopwords()
 ```
+
 
 ## Weighting
 
@@ -147,6 +149,7 @@ with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_")))
     filter_tf_idf()
 ```
 
+
 \*Gr&uuml;en, B. & Hornik, K. (2011). topicmodels: An R Package for Fitting Topic Models. *Journal of Statistical Software*, 40(13), 1-30. http://www.jstatsoft.org/article/view/v040i13/v40i13.pdf
 
 ## Manipulating via Documents 
@@ -164,6 +167,7 @@ with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>
     filter_documents() %>%
     tm::weightTfIdf()
 ```
+
 
 ### Selecting Documents
 
@@ -225,6 +229,7 @@ gather(topic_dat, Topic, Proportion, -c(Person_Time)) %>%
         xlab("Proportion")
 ```
 
+
 ### LDAvis of Model
 
 The output from **LDAvis** is not easily embedded within an R markdown document, thus the reader will need to run the code below to interact with the results.
@@ -267,6 +272,7 @@ x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))
 remove_stopwords(x)
 difftime(Sys.time(), tic)
 ```
+
 
 ### With Stemming
 

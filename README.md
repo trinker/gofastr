@@ -45,6 +45,7 @@ Table of Contents
         -   [[Filter Out Low Occurring Documents](#filter-out-low-occurring-documents)](#[filter-out-low-occurring-documents](#filter-out-low-occurring-documents))
         -   [[Selecting Documents](#selecting-documents)](#[selecting-documents](#selecting-documents))
     -   [[Putting It Together](#putting-it-together)](#[putting-it-together](#putting-it-together))
+        -   [[LDAvis of Model](#ldavis-of-model)](#[ldavis-of-model](#ldavis-of-model))
     -   [[Comparing Timings](#comparing-timings)](#[comparing-timings](#comparing-timings))
         -   [[With Stemming](#with-stemming)](#[with-stemming](#with-stemming))
 
@@ -365,7 +366,8 @@ parameters/hyper-parameters are selected with little regard to analysis.
             xlab("Proportion")
 
 ![](inst/figure/unnamed-chunk-12-1.png)  
-\#\#\# LDAvis of Model
+
+### LDAvis of Model
 
 The output from **LDAvis** is not easily embedded within an R markdown
 document, thus the reader will need to run the code below to interact
@@ -410,7 +412,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.589975 secs
+    ## Time difference of 5.557938 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -425,7 +427,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.09706402 secs
+    ## Time difference of 0.0940671 secs
 
 ### With Stemming
 
@@ -457,7 +459,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.926196 secs
+    ## Time difference of 6.686139 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -472,4 +474,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1170828 secs
+    ## Time difference of 0.1130679 secs

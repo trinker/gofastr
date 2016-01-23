@@ -425,7 +425,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 7.275894 secs
+    ## Time difference of 5.643584 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -440,7 +440,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1130819 secs
+    ## Time difference of 0.1100779 secs
 
 ### With Stemming
 
@@ -472,7 +472,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 7.253074 secs
+    ## Time difference of 6.030273 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -487,4 +487,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.11308 secs
+    ## Time difference of 0.1210849 secs

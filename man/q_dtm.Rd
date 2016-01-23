@@ -7,8 +7,8 @@
 \usage{
 q_dtm(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, ...)
 
-q_dtm_stem(text, docs = seq_along(text), to = "tm",
-  regex = "^[^A-Za-z]*$", ...)
+q_dtm_stem(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE,
+  ...)
 }
 \arguments{
 \item{text}{A vector of strings.}

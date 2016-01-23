@@ -36,7 +36,7 @@ knitr::opts_chunk$set(fig.path = "inst/figure/")
 
 **gofastr** is designed to do one thing really well...It harnesses the power of **data.table** and **stringi** to quickly generate **tm** `DocumentTermMatrix` and `TermDocumentMatrix` data structures. 
 
-In my work I often get data in the form of large .csv files.  Additionally, most of the higher level analysis of text I undertake utilizes a TermDocumentMatrix or DocumentTermMatrix as the input data.  Generally, the `Corpus` generation/structure is an unnecessary step that requires additional run time.  **gofastr** skips this step and uses the power of [**quanteda**](https://github.com/kbenoit/quanteda) (which in turn wraps **data.table**, **stringi**, **Matrix**) to quickly make the `DocumentTermMatrix` or `TermDocumentMatrix` data structures directly.  
+In my work I often get data in the form of large .csv files.  Additionally, most of the higher level analysis of text I undertake utilizes a TermDocumentMatrix or DocumentTermMatrix as the input data.  Generally, the `Corpus` generation/structure is an unnecessary step that requires additional run time.  **gofastr** skips this step and uses the power of [**quanteda**](https://github.com/kbenoit/quanteda) (which in turn wraps **data.table**, **stringi**, & **Matrix**) to quickly make the `DocumentTermMatrix` or `TermDocumentMatrix` data structures directly.  
 
 # Function Usage
 

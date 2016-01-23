@@ -72,7 +72,7 @@ q_dtm <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, 
 
 #' @export
 #' @rdname q_dtm
-q_dtm_stem <- function(text, docs = seq_along(text), to = "tm", regex = "^[^A-Za-z]*$", ...){
+q_dtm_stem <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, ...){
 
     if (!keep.hyphen) text <- gsub("-", " ", text)
 

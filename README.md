@@ -23,8 +23,9 @@ utilizes a TermDocumentMatrix or DocumentTermMatrix as the input data.
 Generally, the `Corpus` generation/structure is an unnecessary step that
 requires additional run time. **gofastr** skips this step and uses the
 power of [**quanteda**](https://github.com/kbenoit/quanteda) (which in
-turn wraps **data.table**, **stringi**, **Matrix**) to quickly make the
-`DocumentTermMatrix` or `TermDocumentMatrix` data structures directly.
+turn wraps **data.table**, **stringi**, & **Matrix**) to quickly make
+the `DocumentTermMatrix` or `TermDocumentMatrix` data structures
+directly.
 
 
 Table of Contents
@@ -160,6 +161,9 @@ DocumentTerm/TermDocument Matrices
 
     (x <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 
+    ## Warning in tokenize.character(x, removeNumbers = removeNumbers,
+    ## removeSeparators = removeSeparators, : Argument regex not used.
+
     ## <<TermDocumentMatrix (terms: 3368, documents: 2912)>>
     ## Non-/sparse entries: 37836/9769780
     ## Sparsity           : 100%
@@ -194,6 +198,9 @@ By default `stopwords = tm::stopwords("english")`, `min.char = 3`, and
 
     with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))) %>%
         remove_stopwords()
+
+    ## Warning in tokenize.character(x, removeNumbers = removeNumbers,
+    ## removeSeparators = removeSeparators, : Argument regex not used.
 
     ## <<TermDocumentMatrix (terms: 3180, documents: 2912)>>
     ## Non-/sparse entries: 19014/9241146
@@ -418,7 +425,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.127912 secs
+    ## Time difference of 7.275894 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -433,7 +440,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1100819 secs
+    ## Time difference of 0.1130819 secs
 
 ### With Stemming
 
@@ -465,7 +472,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.021252 secs
+    ## Time difference of 7.253074 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -480,4 +487,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.11408 secs
+    ## Time difference of 0.11308 secs

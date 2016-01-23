@@ -253,8 +253,8 @@ median per Grüen & Hornik's (2011) demonstration.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         filter_tf_idf()
 
-    ## <<DocumentTermMatrix (documents: 10, terms: 1685)>>
-    ## Non-/sparse entries: 4009/12841
+    ## <<DocumentTermMatrix (documents: 10, terms: 1684)>>
+    ## Non-/sparse entries: 4008/12832
     ## Sparsity           : 76%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -295,8 +295,8 @@ the corpus.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         select_documents('romney', ignore.case=TRUE)
 
-    ## <<DocumentTermMatrix (documents: 3, terms: 3369)>>
-    ## Non-/sparse entries: 3383/6724
+    ## <<DocumentTermMatrix (documents: 3, terms: 3368)>>
+    ## Non-/sparse entries: 3383/6721
     ## Sparsity           : 67%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -304,8 +304,8 @@ the corpus.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         select_documents('^(?!.*romney).*$', ignore.case = TRUE)
 
-    ## <<DocumentTermMatrix (documents: 7, terms: 3369)>>
-    ## Non-/sparse entries: 4920/18663
+    ## <<DocumentTermMatrix (documents: 7, terms: 3368)>>
+    ## Non-/sparse entries: 4919/18657
     ## Sparsity           : 79%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -412,7 +412,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.557938 secs
+    ## Time difference of 5.614983 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -427,7 +427,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.0940671 secs
+    ## Time difference of 0.1100779 secs
 
 ### With Stemming
 
@@ -459,7 +459,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 6.686139 secs
+    ## Time difference of 5.995261 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -474,4 +474,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1130679 secs
+    ## Time difference of 0.1140821 secs

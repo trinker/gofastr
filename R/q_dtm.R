@@ -33,6 +33,10 @@
 #' remove_stopwords(x2, stem=TRUE)
 q_dtm <- function(text, docs = seq_along(text), to = "tm", regex = "^[^A-Za-z]*$", ...){
 
+    if (anyNA(text)) {
+        text[is.na(text)] <- ""
+    }
+
     if (length(unique(docs)) != length(text)){
         text <- unlist(lapply(split(text, docs), paste, collapse = " "))
         docs <- sort(unique(docs))
@@ -40,10 +44,6 @@ q_dtm <- function(text, docs = seq_along(text), to = "tm", regex = "^[^A-Za-z]*$
 #     if (any(grepl(regex, text))) {
 #         text <- sub_in_na(text, regex = regex)
 #     }
-
-    if (anyNA(text)) {
-        text[is.na(text)] <- ""
-    }
 
     out <- quanteda::convert(quanteda::dfm(text, stem = FALSE, verbose = FALSE, ...), to = to)
     row.names(out) <- docs
@@ -70,6 +70,10 @@ q_dtm <- function(text, docs = seq_along(text), to = "tm", regex = "^[^A-Za-z]*$
 #' @rdname q_dtm
 q_dtm_stem <- function(text, docs = seq_along(text), to = "tm", regex = "^[^A-Za-z]*$", ...){
 
+    if (anyNA(text)) {
+        text[is.na(text)] <- ""
+    }
+
     if (length(unique(docs)) != length(text)){
         text <- unlist(lapply(split(text, docs), paste, collapse = " "))
         docs <- sort(unique(docs))
@@ -78,10 +82,6 @@ q_dtm_stem <- function(text, docs = seq_along(text), to = "tm", regex = "^[^A-Za
 #     if (any(grepl(regex, text))) {
 #         text <- sub_in_na(text, regex = regex)
 #     }
-
-    if (anyNA(text)) {
-        text[is.na(text)] <- ""
-    }
 
     out <- quanteda::convert(quanteda::dfm(text, stem = TRUE, verbose = FALSE, ...), to = to)
     row.names(out) <- docs

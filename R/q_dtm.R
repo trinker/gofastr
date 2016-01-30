@@ -37,17 +37,10 @@ q_dtm <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, 
 
     if (!keep.hyphen) text <- gsub("-", " ", text)
 
-    if (anyNA(text)) {
-        text[is.na(text)] <- ""
-    }
-
     if (length(unique(docs)) != length(text)){
         text <- unlist(lapply(split(text, docs), paste, collapse = " "))
         docs <- sort(unique(docs))
     }
-#     if (any(grepl(regex, text))) {
-#         text <- sub_in_na(text, regex = regex)
-#     }
 
     out <- quanteda::convert(quanteda::dfm(text, stem = FALSE, verbose = FALSE, removeNumbers = FALSE, ...), to = to)
     row.names(out) <- docs
@@ -76,18 +69,10 @@ q_dtm_stem <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FA
 
     if (!keep.hyphen) text <- gsub("-", " ", text)
 
-    if (anyNA(text)) {
-        text[is.na(text)] <- ""
-    }
-
     if (length(unique(docs)) != length(text)){
         text <- unlist(lapply(split(text, docs), paste, collapse = " "))
         docs <- sort(unique(docs))
     }
-
-#     if (any(grepl(regex, text))) {
-#         text <- sub_in_na(text, regex = regex)
-#     }
 
     out <- quanteda::convert(quanteda::dfm(text, stem = TRUE, verbose = FALSE, removeNumbers = FALSE, ...), to = to)
     row.names(out) <- docs

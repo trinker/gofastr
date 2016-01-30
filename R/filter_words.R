@@ -24,7 +24,7 @@ filter_words  <- function(x, min = 1) {
 #' @method filter_words TermDocumentMatrix
 filter_words.TermDocumentMatrix  <- function(x, min = 1) {
 
-    x[rowSums(as.matrix(x)) >= min, ]
+    x[slam::row_sums(as.matrix(x)) >= min, ]
 
 }
 
@@ -32,7 +32,7 @@ filter_words.TermDocumentMatrix  <- function(x, min = 1) {
 #' @method filter_words DocumentTermMatrix
 filter_words.DocumentTermMatrix  <- function(x, min = 1) {
 
-    x[, colSums(as.matrix(x)) >= min]
+    x[, slam::col_sums(as.matrix(x)) >= min]
 
 }
 

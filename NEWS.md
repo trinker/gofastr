@@ -17,10 +17,25 @@ And constructed with the following guidelines:
 * Bug fixes and misc changes bumps the patch
 
 
+gofastr 0.2.0 -
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+**NEW FEATURES**
+
+**MINOR FEATURES**
+
+**IMPROVEMENTS**
+
+**CHANGES**
+
 gofastr 0.1.0 - 0.1.1
 ----------------------------------------------------------------
 
 * `partial_republican_debates_2015` data set added.
+
+
 
 gofastr 0.0.1
 ----------------------------------------------------------------

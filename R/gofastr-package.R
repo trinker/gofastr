@@ -1,4 +1,4 @@
-#' Fast DocumentTermMatrix and TermDocumentMatric Creation
+#' Fast DocumentTermMatrix and TermDocumentMatrix Creation
 #'
 #' This package does one thing...It harness the power of \pkg{quanteda},
 #' \pkg{data.table} & \pkg{stringi} to quickly generate \pkg{tm}

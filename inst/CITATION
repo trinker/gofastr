@@ -2,7 +2,7 @@ citHeader("To cite gofastr in publications, please use:")
 
 
 citEntry(entry = "manual",
-    title = "{gofastr}: Fast DocumentTermMatrix and TermDocumentMatric Creation",
+    title = "{gofastr}: Fast DocumentTermMatrix and TermDocumentMatrix Creation",
     author = "Tyler W. Rinker",
     organization = "University at Buffalo/SUNY",
     address = "Buffalo, New York",
@@ -10,7 +10,7 @@ citEntry(entry = "manual",
     year = "2015",
     url = "http://github.com/trinker/gofastr",
     textVersion  = paste("Rinker, T. W. (2015).",
-        "gofastr: Fast DocumentTermMatrix and TermDocumentMatric Creation",
+        "gofastr: Fast DocumentTermMatrix and TermDocumentMatri Creation",
         "version 0.1.0. University at Buffalo. Buffalo, New York.",
         "http://github.com/trinker/gofastr")
 )

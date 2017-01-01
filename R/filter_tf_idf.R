@@ -38,7 +38,7 @@ filter_tf_idf.DocumentTermMatrix <- function(x, min = NULL, verbose = FALSE){
             log2(tm::nDocs(x)/slam::col_sums(x > 0))
 
     if (is.null(min)) {
-        min <- median(term_tfidf)
+        min <- stats::median(term_tfidf)
     }
     if (isTRUE(verbose)) {
         cat("Summary stats for the tf-idf:\n\n")
@@ -56,7 +56,7 @@ filter_tf_idf.TermDocumentMatrix  <- function(x, min = NULL, verbose = FALSE){
             log2(tm::nDocs(x)/slam::row_sums(x > 0))
 
     if (is.null(min)) {
-        min <- median(term_tfidf)
+        min <- stats::median(term_tfidf)
     }
     if (isTRUE(verbose)) {
         cat("Summary stats for the tf-idf:\n\n")

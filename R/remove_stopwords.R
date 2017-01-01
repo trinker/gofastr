@@ -5,7 +5,7 @@
 #'
 #' @param x A \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.
 #' @param stopwords A vector of stopwords to remove.
-#' @param min.char The minial length character for retained words.
+#' @param min.char The minimal length character for retained words.
 #' @param max.char The maximum length character for retained words.
 #' @param stem Logical.  If \code{TRUE} the \code{stopwords} will be stemmed.
 #' @param denumber Logical.  If \code{TRUE} numbers will be excluded.
@@ -76,7 +76,7 @@ regex_pattern <-"(?<=^| )[-.]*\\d+(?:\\.\\d+)?(?= |\\.?$)|\\d+(?:,\\d{3})+(\\.\\
 #' Remove Stopwords from a TermDocumentMatrix/DocumentTermMatrix
 #'
 #' \code{prep_stopwords} - Join multiple vectors of words, convert to lower case,
-#' and return sorted uniue words.
+#' and return sorted unique words.
 #'
 #' @rdname remove_stopwords
 #' @export

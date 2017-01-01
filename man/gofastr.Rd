@@ -5,7 +5,7 @@
 \alias{gofastr}
 \alias{gofastr-package}
 \alias{package-gofastr}
-\title{Fast DocumentTermMatrix and TermDocumentMatric Creation}
+\title{Fast DocumentTermMatrix and TermDocumentMatrix Creation}
 \description{
 This package does one thing...It harness the power of \pkg{quanteda},
 \pkg{data.table} & \pkg{stringi} to quickly generate \pkg{tm}

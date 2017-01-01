@@ -1,4 +1,4 @@
-gofastr
+gofastr   [![Follow](https://img.shields.io/twitter/follow/tylerrinker.svg?style=social)](https://twitter.com/intent/follow?screen_name=tylerrinker)
 ============
 
 
@@ -15,41 +15,53 @@ Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](htt
 
 **gofastr** is designed to do one thing really well...It harnesses the
 power of **data.table** and **stringi** to quickly generate **tm**
-`DocumentTermMatrix` and `TermDocumentMatrix` data structures.
+`DocumentTermMatrix` and `TermDocumentMatrix` data structures. There are
+two types ways in which time is meaingingful to an analyst: (a) coding
+time, or the time spent writing code and (b) computational run time, or
+the time the computer takes to run the code. Ideally, we want to
+minimize both of these sources of time expenditures. The **gofaster**
+package is my attempt to reduce the time an analysts takes to turn raw
+text into an analysis ready data format.
 
 In my work I often get data in the form of large .csv files.
 Additionally, most of the higher level analysis of text I undertake
-utilizes a TermDocumentMatrix or DocumentTermMatrix as the input data.
-Generally, the `Corpus` generation/structure is an unnecessary step that
-requires additional run time. **gofastr** skips this step and uses the
+utilizes a `TermDocumentMatrix` or `DocumentTermMatrix` as the input
+data. Generally, the **tm** package's `Corpus` structure is an
+unnecessary step in building a usable data structure that requires
+additional coding and run time. **gofastr** skips this step and uses the
 power of [**quanteda**](https://github.com/kbenoit/quanteda) (which in
 turn wraps **data.table**, **stringi**, & **Matrix**) to quickly make
-the `DocumentTermMatrix` or `TermDocumentMatrix` data structures
-directly.
+the `DocumentTermMatrix` or `TermDocumentMatrix` that are fast to code
+up and fast for the computer to build.
 
 
 Table of Contents
 ============
 
--   [[Function Usage](#function-usage)](#[function-usage](#function-usage))
--   [[Installation](#installation)](#[installation](#installation))
--   [[Contact](#contact)](#[contact](#contact))
--   [[Demonstration](#demonstration)](#[demonstration](#demonstration))
-    -   [[Load Packages](#load-packages)](#[load-packages](#load-packages))
-    -   [[DocumentTerm/TermDocument Matrices](#documenttermtermdocument-matrices)](#[documenttermtermdocument-matrices](#documenttermtermdocument-matrices))
-    -   [[Stopwords](#stopwords)](#[stopwords](#stopwords))
-    -   [[Weighting](#weighting)](#[weighting](#weighting))
-    -   [[Stemming](#stemming)](#[stemming](#stemming))
-    -   [[Manipulating via Words](#manipulating-via-words)](#[manipulating-via-words](#manipulating-via-words))
-        -   [[Filter Out Low Occurring Words](#filter-out-low-occurring-words)](#[filter-out-low-occurring-words](#filter-out-low-occurring-words))
-        -   [[Filter Out High/Low Frequency (low information) Words](#filter-out-highlow-frequency-low-information-words)](#[filter-out-highlow-frequency-(low-information)-words](#filter-out-highlow-frequency-low-information-words))
-    -   [[Manipulating via Documents](#manipulating-via-documents)](#[manipulating-via-documents](#manipulating-via-documents))
-        -   [[Filter Out Low Occurring Documents](#filter-out-low-occurring-documents)](#[filter-out-low-occurring-documents](#filter-out-low-occurring-documents))
-        -   [[Selecting Documents](#selecting-documents)](#[selecting-documents](#selecting-documents))
-    -   [[Putting It Together](#putting-it-together)](#[putting-it-together](#putting-it-together))
-        -   [[LDAvis of Model](#ldavis-of-model)](#[ldavis-of-model](#ldavis-of-model))
-    -   [[Comparing Timings](#comparing-timings)](#[comparing-timings](#comparing-timings))
-        -   [[With Stemming](#with-stemming)](#[with-stemming](#with-stemming))
+-   [Function Usage](#function-usage)
+-   [Installation](#installation)
+-   [Contact](#contact)
+-   [Demonstration](#demonstration)
+    -   [Load Packages](#load-packages)
+    -   [DocumentTerm/TermDocument Matrices](#documenttermtermdocument-matrices)
+    -   [Stopwords](#stopwords)
+    -   [Weighting](#weighting)
+    -   [Stemming](#stemming)
+    -   [&lt;<DocumentTermMatrix (documents: 2912, terms: 2261)>&gt;](c("documents-2912-terms-2261"-"#section"))
+    -   [Non-/sparse entries: 19557/6564475](#non-sparse-entries-195576564475)
+    -   [Sparsity : 100%](#sparsity-100)
+    -   [Maximal term length: 16](#maximal-term-length-16)
+    -   [Weighting : term frequency (tf)](c("tf"-"#weighting-term-frequency-tf"))
+    -   [Manipulating via Words](#manipulating-via-words)
+        -   [Filter Out Low Occurring Words](#filter-out-low-occurring-words)
+        -   [Filter Out High/Low Frequency (low information) Words](c("low-information"-"#filter-out-highlow-frequency-low-information-words"))
+    -   [Manipulating via Documents](#manipulating-via-documents)
+        -   [Filter Out Low Occurring Documents](#filter-out-low-occurring-documents)
+        -   [Selecting Documents](#selecting-documents)
+    -   [Putting It Together](#putting-it-together)
+        -   [LDAvis of Model](#ldavis-of-model)
+    -   [Comparing Timings](#comparing-timings)
+        -   [With Stemming](#with-stemming)
 
 Function Usage
 ============
@@ -133,11 +145,10 @@ development version:
 Contact
 =======
 
-You are welcome to: 
-* submit suggestions and bug-reports at: <https://github.com/trinker/gofastr/issues> 
-* send a pull request on: <https://github.com/trinker/gofastr/> 
-* compose a friendly e-mail to: <tyler.rinker@gmail.com>
-
+You are welcome to:    
+- submit suggestions and bug-reports at: <https://github.com/trinker/gofastr/issues>    
+- send a pull request on: <https://github.com/trinker/gofastr/>    
+- compose a friendly e-mail to: <tyler.rinker@gmail.com>    
 
 Demonstration
 =============
@@ -212,8 +223,6 @@ weighting functions. This is done post-hoc of creation.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>%
         tm::weightTfIdf()
 
-    ## Warning in tm::weightTfIdf(.): empty document(s): time 1_88.1 time 2_52.1
-
     ## <<DocumentTermMatrix (documents: 2912, terms: 3368)>>
     ## Non-/sparse entries: 37836/9769780
     ## Sparsity           : 100%
@@ -229,11 +238,24 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
     with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))) %>%
         remove_stopwords()
 
-    ## <<DocumentTermMatrix (documents: 2912, terms: 2261)>>
-    ## Non-/sparse entries: 19557/6564475
-    ## Sparsity           : 100%
-    ## Maximal term length: 16
-    ## Weighting          : term frequency (tf)
+    ## ```
+
+&lt;<DocumentTermMatrix (documents: 2912, terms: 2261)>&gt;
+-----------------------------------------------------------
+
+Non-/sparse entries: 19557/6564475
+----------------------------------
+
+Sparsity : 100%
+---------------
+
+Maximal term length: 16
+-----------------------
+
+Weighting : term frequency (tf)
+-------------------------------
+
+\`\`\`
 
 Manipulating via Words
 ----------------------
@@ -260,8 +282,8 @@ median per Grüen & Hornik's (2011) demonstration.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         filter_tf_idf()
 
-    ## <<DocumentTermMatrix (documents: 10, terms: 1684)>>
-    ## Non-/sparse entries: 4008/12832
+    ## <<DocumentTermMatrix (documents: 10, terms: 1685)>>
+    ## Non-/sparse entries: 4009/12841
     ## Sparsity           : 76%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -302,8 +324,8 @@ the corpus.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         select_documents('romney', ignore.case=TRUE)
 
-    ## <<DocumentTermMatrix (documents: 3, terms: 3368)>>
-    ## Non-/sparse entries: 3383/6721
+    ## <<DocumentTermMatrix (documents: 3, terms: 3369)>>
+    ## Non-/sparse entries: 3383/6724
     ## Sparsity           : 67%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -311,8 +333,8 @@ the corpus.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         select_documents('^(?!.*romney).*$', ignore.case = TRUE)
 
-    ## <<DocumentTermMatrix (documents: 7, terms: 3368)>>
-    ## Non-/sparse entries: 4919/18657
+    ## <<DocumentTermMatrix (documents: 7, terms: 3369)>>
+    ## Non-/sparse entries: 4920/18663
     ## Sparsity           : 79%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -352,6 +374,8 @@ parameters/hyper-parameters are selected with little regard to analysis.
         filter_words(4) %>%                       
         filter_documents() 
 
+`##`
+
     ## Run the Model
     lda_model <- topicmodels::LDA(doc_term_mat, 10, control = list(seed=100))
 
@@ -372,7 +396,7 @@ parameters/hyper-parameters are selected with little regard to analysis.
             guides(fill=FALSE) +
             xlab("Proportion")
 
-![](inst/figure/unnamed-chunk-12-1.png)  
+![](inst/figure/unnamed-chunk-12-1.png)
 
 ### LDAvis of Model
 
@@ -419,7 +443,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.75407 secs
+    ## Time difference of 8.604305 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -434,7 +458,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.09505916 secs
+    ## Time difference of 0.09907007 secs
 
 ### With Stemming
 
@@ -466,11 +490,14 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 5.867154 secs
+    ## Time difference of 9.184908 secs
 
     ## gofastr Timing
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
+
+`##`
+
     remove_stopwords(x, stem=TRUE)
 
     ## <<DocumentTermMatrix (documents: 2912, terms: 2249)>>
@@ -481,4 +508,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.11408 secs
+    ## Time difference of 0.548388 secs

@@ -15,7 +15,7 @@ prep_stopwords(...)
 
 \item{stopwords}{A vector of stopwords to remove.}
 
-\item{min.char}{The minial length character for retained words.}
+\item{min.char}{The minimal length character for retained words.}
 
 \item{max.char}{The maximum length character for retained words.}
 
@@ -33,7 +33,7 @@ Returns a \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMa
 \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.
 
 \code{prep_stopwords} - Join multiple vectors of words, convert to lower case,
-and return sorted uniue words.
+and return sorted unique words.
 }
 \examples{
 (x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))

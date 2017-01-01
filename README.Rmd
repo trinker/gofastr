@@ -34,9 +34,9 @@ knitr::opts_chunk$set(fig.path = "inst/figure/")
 <img src="inst/gofastr_logo/r_gofastr.png" width="150" alt="readability Logo">  
 
 
-**gofastr** is designed to do one thing really well...It harnesses the power of **data.table** and **stringi** to quickly generate **tm** `DocumentTermMatrix` and `TermDocumentMatrix` data structures. 
+**gofastr** is designed to do one thing really well...It harnesses the power of **data.table** and **stringi** to quickly generate **tm** `DocumentTermMatrix` and `TermDocumentMatrix` data structures. There are two types ways in which time is meaingingful to an analyst: (a) coding time, or the time spent writing code and (b) computational run time, or the time the computer takes to run the code.  Ideally, we want to minimize both of these sources of time expenditures.  The **gofaster** package is my attempt to reduce the time an analysts takes to turn raw text into an analysis ready data format.
 
-In my work I often get data in the form of large .csv files.  Additionally, most of the higher level analysis of text I undertake utilizes a TermDocumentMatrix or DocumentTermMatrix as the input data.  Generally, the `Corpus` generation/structure is an unnecessary step that requires additional run time.  **gofastr** skips this step and uses the power of [**quanteda**](https://github.com/kbenoit/quanteda) (which in turn wraps **data.table**, **stringi**, & **Matrix**) to quickly make the `DocumentTermMatrix` or `TermDocumentMatrix` data structures directly.  
+In my work I often get data in the form of large .csv files.  Additionally, most of the higher level analysis of text I undertake utilizes a `TermDocumentMatrix` or `DocumentTermMatrix` as the input data.  Generally, the **tm** package's `Corpus` structure is an unnecessary step in building a usable data structure that requires additional coding and run time.  **gofastr** skips this step and uses the power of [**quanteda**](https://github.com/kbenoit/quanteda) (which in turn wraps **data.table**, **stringi**, & **Matrix**) to quickly make the `DocumentTermMatrix` or `TermDocumentMatrix` that are fast to code up and fast for the computer to build.  
 
 # Function Usage
 

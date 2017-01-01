@@ -20,17 +20,7 @@ And constructed with the following guidelines:
 gofastr 0.1.0
 ----------------------------------------------------------------
 
-**BUG FIXES**
-
-**NEW FEATURES**
-
 * `partial_republican_debates_2015` data set added.
-
-**MINOR FEATURES**
-
-IMPROVEMENTS
-
-**CHANGES**
 
 gofastr 0.0.1
 ----------------------------------------------------------------

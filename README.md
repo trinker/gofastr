@@ -9,7 +9,7 @@ developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repo
 Status](https://travis-ci.org/trinker/gofastr.svg?branch=master)](https://travis-ci.org/trinker/gofastr)
 [![Coverage
 Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](https://coveralls.io/r/trinker/gofastr?branch=master)
-<a href="https://img.shields.io/badge/Version-0.1.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.1.1-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.2.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.2.0-orange.svg" alt="Version"/></a>
 </p>
 <img src="inst/gofastr_logo/r_gofastr.png" width="150" alt="readability Logo">
 
@@ -47,11 +47,6 @@ Table of Contents
     -   [Stopwords](#stopwords)
     -   [Weighting](#weighting)
     -   [Stemming](#stemming)
-    -   [&lt;<DocumentTermMatrix (documents: 2912, terms: 2261)>&gt;](c("documents-2912-terms-2261"-"#section"))
-    -   [Non-/sparse entries: 19557/6564475](#non-sparse-entries-195576564475)
-    -   [Sparsity : 100%](#sparsity-100)
-    -   [Maximal term length: 16](#maximal-term-length-16)
-    -   [Weighting : term frequency (tf)](c("tf"-"#weighting-term-frequency-tf"))
     -   [Manipulating via Words](#manipulating-via-words)
         -   [Filter Out Low Occurring Words](#filter-out-low-occurring-words)
         -   [Filter Out High/Low Frequency (low information) Words](c("low-information"-"#filter-out-highlow-frequency-low-information-words"))
@@ -164,16 +159,16 @@ DocumentTerm/TermDocument Matrices
 
     (w <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))))
 
-    ## <<DocumentTermMatrix (documents: 2912, terms: 3368)>>
-    ## Non-/sparse entries: 37836/9769780
+    ## <<DocumentTermMatrix (documents: 2912, terms: 3376)>>
+    ## Non-/sparse entries: 42057/9788855
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
     (x <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 
-    ## <<TermDocumentMatrix (terms: 3368, documents: 2912)>>
-    ## Non-/sparse entries: 37836/9769780
+    ## <<TermDocumentMatrix (terms: 3376, documents: 2912)>>
+    ## Non-/sparse entries: 42057/9788855
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -223,8 +218,10 @@ weighting functions. This is done post-hoc of creation.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, tot, sep = "_"))) %>%
         tm::weightTfIdf()
 
-    ## <<DocumentTermMatrix (documents: 2912, terms: 3368)>>
-    ## Non-/sparse entries: 37836/9769780
+    ## Warning in tm::weightTfIdf(.): empty document(s): time 1_88.1
+
+    ## <<DocumentTermMatrix (documents: 2912, terms: 3376)>>
+    ## Non-/sparse entries: 42057/9788855
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency - inverse document frequency (normalized) (tf-idf)
@@ -238,24 +235,11 @@ To stem words utilize `q_dtm_stem` and `q_tdm_stem` which utilize
     with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))) %>%
         remove_stopwords()
 
-    ## ```
-
-&lt;<DocumentTermMatrix (documents: 2912, terms: 2261)>&gt;
------------------------------------------------------------
-
-Non-/sparse entries: 19557/6564475
-----------------------------------
-
-Sparsity : 100%
----------------
-
-Maximal term length: 16
------------------------
-
-Weighting : term frequency (tf)
--------------------------------
-
-\`\`\`
+    ## <<DocumentTermMatrix (documents: 2912, terms: 2261)>>
+    ## Non-/sparse entries: 19557/6564475
+    ## Sparsity           : 100%
+    ## Maximal term length: 16
+    ## Weighting          : term frequency (tf)
 
 Manipulating via Words
 ----------------------
@@ -267,8 +251,8 @@ To filter out words with counts below a threshold we use `filter_words`.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         filter_words(5)
 
-    ## <<DocumentTermMatrix (documents: 10, terms: 959)>>
-    ## Non-/sparse entries: 4960/4630
+    ## <<DocumentTermMatrix (documents: 10, terms: 967)>>
+    ## Non-/sparse entries: 5021/4649
     ## Sparsity           : 48%
     ## Maximal term length: 14
     ## Weighting          : term frequency (tf)
@@ -282,8 +266,8 @@ median per Grüen & Hornik's (2011) demonstration.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         filter_tf_idf()
 
-    ## <<DocumentTermMatrix (documents: 10, terms: 1685)>>
-    ## Non-/sparse entries: 4009/12841
+    ## <<DocumentTermMatrix (documents: 10, terms: 1689)>>
+    ## Non-/sparse entries: 4024/12866
     ## Sparsity           : 76%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -309,8 +293,8 @@ row/column sum greater than 1) to eliminate the warning:
         filter_documents() %>%
         tm::weightTfIdf()
 
-    ## <<DocumentTermMatrix (documents: 2910, terms: 3368)>>
-    ## Non-/sparse entries: 37836/9763044
+    ## <<DocumentTermMatrix (documents: 2911, terms: 3376)>>
+    ## Non-/sparse entries: 42057/9785479
     ## Sparsity           : 100%
     ## Maximal term length: 16
     ## Weighting          : term frequency - inverse document frequency (normalized) (tf-idf)
@@ -324,17 +308,17 @@ the corpus.
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         select_documents('romney', ignore.case=TRUE)
 
-    ## <<DocumentTermMatrix (documents: 3, terms: 3369)>>
-    ## Non-/sparse entries: 3383/6724
-    ## Sparsity           : 67%
+    ## <<DocumentTermMatrix (documents: 3, terms: 3377)>>
+    ## Non-/sparse entries: 3404/6727
+    ## Sparsity           : 66%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
 
     with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))) %>%
         select_documents('^(?!.*romney).*$', ignore.case = TRUE)
 
-    ## <<DocumentTermMatrix (documents: 7, terms: 3369)>>
-    ## Non-/sparse entries: 4920/18663
+    ## <<DocumentTermMatrix (documents: 7, terms: 3377)>>
+    ## Non-/sparse entries: 4960/18679
     ## Sparsity           : 79%
     ## Maximal term length: 16
     ## Weighting          : term frequency (tf)
@@ -374,14 +358,15 @@ parameters/hyper-parameters are selected with little regard to analysis.
         filter_words(4) %>%                       
         filter_documents() 
 
-`##`
-
     ## Run the Model
     lda_model <- topicmodels::LDA(doc_term_mat, 10, control = list(seed=100))
 
     ## Plot the Topics Per Person_Time
     topics <- posterior(lda_model, doc_term_mat)$topics
     topic_dat <- add_rownames(as.data.frame(topics), "Person_Time")
+
+    ## Warning: Deprecated, use tibble::rownames_to_column() instead.
+
     colnames(topic_dat)[-1] <- apply(terms(lda_model, 10), 2, paste, collapse = ", ")
 
     gather(topic_dat, Topic, Proportion, -c(Person_Time)) %>%
@@ -422,6 +407,9 @@ significantly less code.
     ## tm Timing
     tic <- Sys.time()
     rownames(pd) <- paste("docs", 1:nrow(pd))
+
+    ## Warning: Setting row names on a tibble is deprecated.
+
     pd[['groups']] <- with(pd, paste(time, tot, sep = "_"))
     pd <- Corpus(DataframeSource(pd[, 5:6, drop=FALSE]))
 
@@ -443,7 +431,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 10.06477 secs
+    ## Time difference of 10.98943 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -458,7 +446,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.123091 secs
+    ## Time difference of 0.5313768 secs
 
 ### With Stemming
 
@@ -468,6 +456,9 @@ significantly less code.
     ## tm Timing
     tic <- Sys.time()
     rownames(pd) <- paste("docs", 1:nrow(pd))
+
+    ## Warning: Setting row names on a tibble is deprecated.
+
     pd[['groups']] <- with(pd, paste(time, tot, sep = "_"))
     pd <- Corpus(DataframeSource(pd[, 5:6, drop=FALSE]))
     pd <- tm_map(pd, stemDocument)
@@ -490,14 +481,11 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 10.12016 secs
+    ## Time difference of 11.9727 secs
 
     ## gofastr Timing
     tic <- Sys.time()
     x <-with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_")))
-
-`##`
-
     remove_stopwords(x, stem=TRUE)
 
     ## <<DocumentTermMatrix (documents: 2912, terms: 2249)>>
@@ -508,4 +496,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.544384 secs
+    ## Time difference of 0.4643171 secs

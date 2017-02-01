@@ -34,9 +34,11 @@ knitr::opts_chunk$set(fig.path = "inst/figure/")
 <img src="inst/gofastr_logo/r_gofastr.png" width="150" alt="readability Logo">  
 
 
-**gofastr** is designed to do one thing really well...It harnesses the power of **data.table** and **stringi** to quickly generate **tm** `DocumentTermMatrix` and `TermDocumentMatrix` data structures. There are two types ways in which time is meaingingful to an analyst: (a) coding time, or the time spent writing code and (b) computational run time, or the time the computer takes to run the code.  Ideally, we want to minimize both of these sources of time expenditures.  The **gofaster** package is my attempt to reduce the time an analysts takes to turn raw text into an analysis ready data format.
+**gofastr** is designed to do one thing really well...make a `DocumentTermMatrix`. It harnesses the
+power [**quanteda**](https://github.com/kbenoit/quanteda) (which in
+turn wraps **data.table**, **stringi**, & **Matrix**) to quickly generate **tm** `DocumentTermMatrix` and `TermDocumentMatrix` data structures. There are two ways in which time is meaingingful to an analyst: (a) coding time, or the time spent writing code and (b) computational run time, or the time the computer takes to run the code.  Ideally, we want to minimize both of these sources of time expenditures.  The **gofaster** package is my attempt to reduce the time an analysts takes to turn raw text into an analysis ready data format and relies on **quanteda** to minimize the run time.
 
-In my work I often get data in the form of large .csv files.  Additionally, most of the higher level analysis of text I undertake utilizes a `TermDocumentMatrix` or `DocumentTermMatrix` as the input data.  Generally, the **tm** package's `Corpus` structure is an unnecessary step in building a usable data structure that requires additional coding and run time.  **gofastr** skips this step and uses the power of [**quanteda**](https://github.com/kbenoit/quanteda) (which in turn wraps **data.table**, **stringi**, & **Matrix**) to quickly make the `DocumentTermMatrix` or `TermDocumentMatrix` that are fast to code up and fast for the computer to build.  
+In my work I often get data in the form of large .csv files or SQL databases.  Additionally, most of the higher level analysis of text I undertake utilizes a `TermDocumentMatrix` or `DocumentTermMatrix` as the input data.  Generally, the **tm** package's `Corpus` structure is an unnecessary step in building a usable data structure that requires additional coding and run time.  **gofastr** skips this step and uses [**quanteda**](https://github.com/kbenoit/quanteda) to quickly make the `DocumentTermMatrix` or `TermDocumentMatrix` structures that are fast to code up and fast for the computer to build.  
 
 # Function Usage
 
@@ -94,7 +96,7 @@ pacman::p_load(gofastr, tm, magrittr)
 
 Stopwords are those words that we want to remove from the analysis because they give little information gain.  These words occur so frequently in all documents or give very content information (i.e., function words) and thus are excluded.  The `remove_stopwords` function allows the user to remove stopwords using three approaches/arguments:
 
-1.  `stopwords` - A vector of common + resercher defined words 
+1.  `stopwords` - A vector of common + resercher defined words (see [**lexicon**](https://CRAN.R-project.org/package=lexicon) package)
 2.  `min.char`/`max.char` - Automatic removal of words less/greater than n characters in length 
 3.  `denumber` - Removal of words that are numbers
 

@@ -20,6 +20,8 @@
 #' @param keep.hyphen logical.  If \code{TRUE} hyphens are retained in the terms
 #' (e.g., "math-like" is kept as "math-like"), otherwise they become a split for
 #' terms (e.g., "math-like" is converted to "math" & "like").
+#' @param ngrams A vector of ngrams (multiple wrds with spaces).  Using this
+#' option results in the ngrams that will be retained in the matrix.
 #' @param \ldots Additional arguments passed to \code{\link[quanteda]{dfm}}
 #' @keywords tdm TermDocumentMatrix
 #' @importFrom data.table :=
@@ -31,18 +33,20 @@
 #'
 #' (x2 <- with(presidential_debates_2012, q_tdm_stem(dialogue, paste(time, tot, sep = "_"))))
 #' remove_stopwords(x2, stem=TRUE)
-q_tdm <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, ...){
+q_tdm <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE,
+    ngrams = NULL, ...){
 
-    t(q_dtm(text = text, docs = docs, to = to, keep.hyphen = keep.hyphen, ...))
+    t(q_dtm(text = text, docs = docs, to = to, keep.hyphen = keep.hyphen, ngrams = ngrams, ...))
 
 }
 
 
 #' @export
 #' @rdname q_tdm
-q_tdm_stem <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, ...){
+q_tdm_stem <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE,
+    ngrams = NULL, ...){
 
-    t(q_dtm_stem(text = text, docs = docs, to = to, keep.hyphen = keep.hyphen, ...))
+    t(q_dtm_stem(text = text, docs = docs, to = to, keep.hyphen = keep.hyphen, ngrams = ngrams, ...))
 
 }
 

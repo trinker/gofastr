@@ -4,12 +4,15 @@
 \alias{select_documents}
 \title{Select Documents rom a TermDocumentMatrix/DocumentTermMatrix}
 \usage{
-select_documents(x, pattern, ...)
+select_documents(x, pattern, invert = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{\link[tm]{TermDocumentMatrix}} or \code{\link[tm]{DocumentTermMatrix}}.}
 
 \item{pattern}{A regex pattern used to select documents.}
+
+\item{invert}{logical.  If \code{TRUE} the pattern is inverted to exclude
+these documents.}
 
 \item{\ldots}{Other arguments passed to \code{\link[base]{grepl}}
 (\code{perl = TRUE} is hard coded).}
@@ -24,7 +27,8 @@ or \code{\link[tm]{DocumentTermMatrix}} matching a regular expression.
 \examples{
 (x <-with(presidential_debates_2012, q_dtm(dialogue, paste(time, person, sep = "_"))))
 select_documents(x, 'romney', ignore.case=TRUE)
-select_documents(x, '^(?!.*romney).*$', ignore.case = TRUE)
+select_documents(x, '^(?!.*romney).*$', ignore.case = TRUE)      # regex way to invert
+select_documents(x, 'romney', ignore.case = TRUE, invert = TRUE) # easier way to invert
 (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, person, sep = "_"))))
 select_documents(y, '[2-3]')
 }

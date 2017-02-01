@@ -13,26 +13,28 @@ Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](htt
 </p>
 <img src="inst/gofastr_logo/r_gofastr.png" width="150" alt="readability Logo">
 
-**gofastr** is designed to do one thing really well...It harnesses the
-power of **data.table** and **stringi** to quickly generate **tm**
+**gofastr** is designed to do one thing really well...make a
+`DocumentTermMatrix`. It harnesses the power
+[**quanteda**](https://github.com/kbenoit/quanteda) (which in turn wraps
+**data.table**, **stringi**, & **Matrix**) to quickly generate **tm**
 `DocumentTermMatrix` and `TermDocumentMatrix` data structures. There are
-two types ways in which time is meaingingful to an analyst: (a) coding
-time, or the time spent writing code and (b) computational run time, or
-the time the computer takes to run the code. Ideally, we want to
-minimize both of these sources of time expenditures. The **gofaster**
-package is my attempt to reduce the time an analysts takes to turn raw
-text into an analysis ready data format.
+two ways in which time is meaingingful to an analyst: (a) coding time,
+or the time spent writing code and (b) computational run time, or the
+time the computer takes to run the code. Ideally, we want to minimize
+both of these sources of time expenditures. The **gofaster** package is
+my attempt to reduce the time an analysts takes to turn raw text into an
+analysis ready data format and relies on **quanteda** to minimize the
+run time.
 
-In my work I often get data in the form of large .csv files.
-Additionally, most of the higher level analysis of text I undertake
-utilizes a `TermDocumentMatrix` or `DocumentTermMatrix` as the input
-data. Generally, the **tm** package's `Corpus` structure is an
+In my work I often get data in the form of large .csv files or SQL
+databases. Additionally, most of the higher level analysis of text I
+undertake utilizes a `TermDocumentMatrix` or `DocumentTermMatrix` as the
+input data. Generally, the **tm** package's `Corpus` structure is an
 unnecessary step in building a usable data structure that requires
-additional coding and run time. **gofastr** skips this step and uses the
-power of [**quanteda**](https://github.com/kbenoit/quanteda) (which in
-turn wraps **data.table**, **stringi**, & **Matrix**) to quickly make
-the `DocumentTermMatrix` or `TermDocumentMatrix` that are fast to code
-up and fast for the computer to build.
+additional coding and run time. **gofastr** skips this step and uses
+[**quanteda**](https://github.com/kbenoit/quanteda) to quickly make the
+`DocumentTermMatrix` or `TermDocumentMatrix` structures that are fast to
+code up and fast for the computer to build.
 
 
 Table of Contents
@@ -66,59 +68,59 @@ Functions typically fall into the task category of matrix (1) *creation*
 & (2) *manipulating*. The main functions, task category, & descriptions
 are summarized in the table below:
 
-<table style="width:157%;">
+<table>
 <colgroup>
-<col width="34%" />
-<col width="20%" />
-<col width="101%" />
+<col width="22%" />
+<col width="13%" />
+<col width="64%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">Function</th>
-<th align="left">Category</th>
-<th align="left">Description</th>
+<th>Function</th>
+<th>Category</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>q_tdm</code> &amp; <code>q_tdm_stem</code></td>
-<td align="left">creation</td>
-<td align="left"><code>TermDocumentMatrix</code> from string vector</td>
+<td><code>q_tdm</code> &amp; <code>q_tdm_stem</code></td>
+<td>creation</td>
+<td><code>TermDocumentMatrix</code> from string vector</td>
 </tr>
 <tr class="even">
-<td align="left"><code>q_dtm</code> &amp; <code>q_dtm_stem</code></td>
-<td align="left">creation</td>
-<td align="left"><code>DocumentTermMatrix</code> from string vector</td>
+<td><code>q_dtm</code> &amp; <code>q_dtm_stem</code></td>
+<td>creation</td>
+<td><code>DocumentTermMatrix</code> from string vector</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>remove_stopwords</code></td>
-<td align="left">manipulation</td>
-<td align="left">Remove stopwords and minimal character words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+<td><code>remove_stopwords</code></td>
+<td>manipulation</td>
+<td>Remove stopwords and minimal character words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>filter_words</code></td>
-<td align="left">manipulation</td>
-<td align="left">Filter words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+<td><code>filter_words</code></td>
+<td>manipulation</td>
+<td>Filter words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>filter_tf_idf</code></td>
-<td align="left">manipulation</td>
-<td align="left">Filter low tf-idf words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+<td><code>filter_tf_idf</code></td>
+<td>manipulation</td>
+<td>Filter low tf-idf words from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>filter_documents</code></td>
-<td align="left">manipulation</td>
-<td align="left">Filter documents from a <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+<td><code>filter_documents</code></td>
+<td>manipulation</td>
+<td>Filter documents from a <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>select_documents</code></td>
-<td align="left">manipulation</td>
-<td align="left">Select documents from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
+<td><code>select_documents</code></td>
+<td>manipulation</td>
+<td>Select documents from <code>TermDocumentMatrix</code>/<code>DocumentTermMatrix</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>sub_in_na</code></td>
-<td align="left">manipulation</td>
-<td align="left">Sub missing (<code>NA</code>) for regex matches (defaut: non-content elements)</td>
+<td><code>sub_in_na</code></td>
+<td>manipulation</td>
+<td>Sub missing (<code>NA</code>) for regex matches (defaut: non-content elements)</td>
 </tr>
 </tbody>
 </table>
@@ -182,7 +184,8 @@ frequently in all documents or give very content information (i.e.,
 function words) and thus are excluded. The `remove_stopwords` function
 allows the user to remove stopwords using three approaches/arguments:
 
-1.  `stopwords` - A vector of common + resercher defined words
+1.  `stopwords` - A vector of common + resercher defined words (see
+    [**lexicon**](https://CRAN.R-project.org/package=lexicon) package)
 2.  `min.char`/`max.char` - Automatic removal of words less/greater than
     n characters in length
 3.  `denumber` - Removal of words that are numbers
@@ -431,7 +434,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 10.98943 secs
+    ## Time difference of 8.353924 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -446,7 +449,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.5313768 secs
+    ## Time difference of 0.1170759 secs
 
 ### With Stemming
 
@@ -481,7 +484,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 11.9727 secs
+    ## Time difference of 8.58309 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -496,4 +499,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.4643171 secs
+    ## Time difference of 0.165118 secs

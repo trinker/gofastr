@@ -24,14 +24,24 @@ gofastr 0.2.0 -
 
 **NEW FEATURES**
 
+* `ngrams` argument added to `q_dtm` and `q_tdm` to allow ngrams in the matrix
+  terms (see isue #3).
+
+* `select_document` picks up an `invert` argument to pick documents not
+  containing the regex match.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**
 
 **CHANGES**
 
+
+
 gofastr 0.1.0 - 0.1.1
 ----------------------------------------------------------------
+
+**NEW FEATURES**
 
 * `partial_republican_debates_2015` data set added.
 

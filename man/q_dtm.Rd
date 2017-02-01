@@ -5,10 +5,11 @@
 \alias{q_dtm_stem}
 \title{Quick DocumentTermMatrix}
 \usage{
-q_dtm(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, ...)
+q_dtm(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE,
+  ngrams = NULL, ...)
 
 q_dtm_stem(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE,
-  ...)
+  ngrams = NULL, ...)
 }
 \arguments{
 \item{text}{A vector of strings.}
@@ -30,6 +31,9 @@ whose document-term matrix representation the dfm will be converted:
 (e.g., "math-like" is kept as "math-like"), otherwise they become a split for
 terms (e.g., "math-like" is converted to "math" & "like").}
 
+\item{ngrams}{A vector of ngrams (multiple wrds with spaces).  Using this
+option results in the ngrams that will be retained in the matrix.}
+
 \item{\ldots}{Additional arguments passed to \code{\link[quanteda]{dfm}}.}
 }
 \value{
@@ -47,6 +51,18 @@ tm::weightTfIdf(x)
 
 (x2 <- with(presidential_debates_2012, q_dtm_stem(dialogue, paste(time, tot, sep = "_"))))
 remove_stopwords(x2, stem=TRUE)
+
+bigrams <- c('make sure', 'governor romney', 'mister president',
+    'united states', 'middle class', 'middle east', 'health care',
+    'american people', 'dodd frank', 'wall street', 'small business')
+
+grep(" ", x$dimnames$Terms, value = TRUE) #no ngrams
+
+(x3 <- with(presidential_debates_2012,
+    q_dtm(dialogue, paste(time, tot, sep = "_"), ngrams = bigrams)
+))
+
+grep(" ", x3$dimnames$Terms, value = TRUE) #ngrams
 }
 \seealso{
 \code{\link[quanteda]{dfm}},

@@ -5,10 +5,11 @@
 \alias{q_tdm_stem}
 \title{Quick TermDocumentMatrix}
 \usage{
-q_tdm(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE, ...)
+q_tdm(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE,
+  ngrams = NULL, ...)
 
 q_tdm_stem(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE,
-  ...)
+  ngrams = NULL, ...)
 }
 \arguments{
 \item{text}{A vector of strings.}
@@ -29,6 +30,9 @@ whose document-term matrix representation the dfm will be converted:
 \item{keep.hyphen}{logical.  If \code{TRUE} hyphens are retained in the terms
 (e.g., "math-like" is kept as "math-like"), otherwise they become a split for
 terms (e.g., "math-like" is converted to "math" & "like").}
+
+\item{ngrams}{A vector of ngrams (multiple wrds with spaces).  Using this
+option results in the ngrams that will be retained in the matrix.}
 
 \item{\ldots}{Additional arguments passed to \code{\link[quanteda]{dfm}}}
 }

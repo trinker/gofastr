@@ -45,6 +45,10 @@ NEW FEATURES
 
 * `partial_republican_debates_2015` data set added.
 
+* `as_dtm` and `as_tdm` added to coerce objects to **tm** `DocumentTermMatrix`
+  and `TermDocumentMatrix` data structures.  This will allow other packages to
+  easily import this function for their objects.
+
 
 
 gofastr 0.0.1

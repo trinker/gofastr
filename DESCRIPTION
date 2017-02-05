@@ -10,7 +10,7 @@ Description: Harness the power of 'quanteda', 'data.table' & 'stringi'
 Depends: R (>= 3.2.2)
 Suggests: testthat
 Imports: data.table (>= 1.9.5), quanteda, slam, SnowballC, stats, tm
-Date: 2017-01-31
+Date: 2017-02-05
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)

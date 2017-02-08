@@ -30,6 +30,11 @@ gofastr 0.2.0 -
 * `select_document` picks up an `invert` argument to pick documents not
   containing the regex match.
 
+* `as_dtm` and `as_tdm` added to coerce objects to **tm** `DocumentTermMatrix`
+  and `TermDocumentMatrix` data structures.  This will allow other packages to
+  easily import this function for their objects.
+
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**
@@ -44,11 +49,6 @@ gofastr 0.1.0 - 0.1.1
 **NEW FEATURES**
 
 * `partial_republican_debates_2015` data set added.
-
-* `as_dtm` and `as_tdm` added to coerce objects to **tm** `DocumentTermMatrix`
-  and `TermDocumentMatrix` data structures.  This will allow other packages to
-  easily import this function for their objects.
-
 
 
 gofastr 0.0.1

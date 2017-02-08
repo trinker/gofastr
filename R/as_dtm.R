@@ -63,10 +63,23 @@ as_dtm.character <- function(x, weighting = tm::weightTf, ...){
 
 
 
+#' @export
+#' @method as_dtm count_tags
+as_dtm.count_tags <- function(x, weighting = tm::weightTf, ...){
 
+    atts <- attributes(x)
+    class(x) <- class(x)[!class(x) %in% "count_tags"]
 
-
-
+    y <- as.matrix(x[, atts[['pos.vars']], with = FALSE])
+    cols <- colnames(x)[!colnames(x) %in% c(atts[['pos.vars']], 'n.tokens')]
+    if (length(cols) == 0) {
+        rnms <- seq_len(nrow(y))
+    } else {
+        rnms <- paste2(x[, cols, with = FALSE])
+    }
+    rownames(y) <- rnms
+    tm::as.DocumentTermMatrix(slam::as.simple_triplet_matrix(y), weighting = weighting)
+}
 
 
 #' @export
@@ -100,3 +113,21 @@ as_tdm.character <- function(x, weighting = tm::weightTf, ...){
 
 }
 
+
+#' @export
+#' @method as_tdm count_tags
+as_tdm.count_tags <- function(x, weighting = tm::weightTf, ...){
+
+    atts <- attributes(x)
+    class(x) <- class(x)[!class(x) %in% "count_tags"]
+
+    y <- as.matrix(x[, atts[['pos.vars']], with = FALSE])
+    cols <- colnames(x)[!colnames(x) %in% c(atts[['pos.vars']], 'n.tokens')]
+    if (length(cols) == 0) {
+        rnms <- seq_len(nrow(y))
+    } else {
+        rnms <- paste2(x[, cols, with = FALSE])
+    }
+    rownames(y) <- rnms
+    tm::as.TermDocumentMatrix(slam::as.simple_triplet_matrix(t(y)), weighting = weighting)
+}

@@ -9,7 +9,7 @@ developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repo
 Status](https://travis-ci.org/trinker/gofastr.svg?branch=master)](https://travis-ci.org/trinker/gofastr)
 [![Coverage
 Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](https://coveralls.io/r/trinker/gofastr?branch=master)
-<a href="https://img.shields.io/badge/Version-0.2.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.2.0-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.2.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.2.1-orange.svg" alt="Version"/></a>
 </p>
 <img src="inst/gofastr_logo/r_gofastr.png" width="150" alt="readability Logo">
 
@@ -434,7 +434,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 8.353924 secs
+    ## Time difference of 8.90318 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -449,7 +449,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1170759 secs
+    ## Time difference of 0.1511071 secs
 
 ### With Stemming
 
@@ -484,7 +484,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 8.58309 secs
+    ## Time difference of 9.406479 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -499,4 +499,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.165118 secs
+    ## Time difference of 0.1641161 secs

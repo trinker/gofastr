@@ -27,7 +27,8 @@ with(partial_republican_debates_2015,
     as_dtm(dialogue, paste(location, element_id, sentence_id, sep = "_"))
 )
 \dontrun{
-## termco object
+## termco object to DTM/TDM
+library(termco)
 as_dtm(markers)
 as_dtm(markers,weighting = tm::weightTfIdf)
 as_tdm(markers)
@@ -44,6 +45,24 @@ plot(mod)
 rect.hclust(mod, k = 5, border = "red")
 
 (clusters <- cutree(mod, 5))
+
+## Parts of speech to DTM/TDM
+library(tagger)
+library(dplyr)
+data(presidential_debates_2012_pos)
+
+pos <- presidential_debates_2012_pos \%>\%
+    select_tags(c("NN", "NNP", "NNPS", "NNS"))
+
+as_dtm(pos_text)
+as_dtm(pos_text, pos=FALSE)
+
+as_tdm(pos_text)
+as_tdm(pos_text, pos=FALSE)
+
+presidential_debates_2012_pos \%>\%
+    as_basic() \%>\%
+    as_dtm()
 }
 }
 \keyword{documenttermmatrix,}

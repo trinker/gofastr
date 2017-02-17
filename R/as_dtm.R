@@ -14,7 +14,8 @@
 #'     as_dtm(dialogue, paste(location, element_id, sentence_id, sep = "_"))
 #' )
 #' \dontrun{
-#' ## termco object
+#' ## termco object to DTM/TDM
+#' library(termco)
 #' as_dtm(markers)
 #' as_dtm(markers,weighting = tm::weightTfIdf)
 #' as_tdm(markers)
@@ -31,6 +32,24 @@
 #' rect.hclust(mod, k = 5, border = "red")
 #'
 #' (clusters <- cutree(mod, 5))
+#'
+#' ## Parts of speech to DTM/TDM
+#' library(tagger)
+#' library(dplyr)
+#' data(presidential_debates_2012_pos)
+#'
+#' pos <- presidential_debates_2012_pos %>%
+#'     select_tags(c("NN", "NNP", "NNPS", "NNS"))
+#'
+#' as_dtm(pos_text)
+#' as_dtm(pos_text, pos=FALSE)
+#'
+#' as_tdm(pos_text)
+#' as_tdm(pos_text, pos=FALSE)
+#'
+#' presidential_debates_2012_pos %>%
+#'     as_basic() %>%
+#'     as_dtm()
 #' }
 as_dtm <- function(x, weighting = tm::weightTf, ...){
     UseMethod('as_dtm')
@@ -83,6 +102,16 @@ as_dtm.count_tags <- function(x, weighting = tm::weightTf, ...){
 
 
 #' @export
+#' @method as_dtm tag_pos
+as_dtm.tag_pos <- function(x, weighting = tm::weightTf, pos = TRUE, ...){
+
+    if (isTRUE(pos)) x <- get_pos(x) else x <- get_tokens(x)
+    tm::weightTfIdf(q_dtm(x, ...))
+
+}
+
+
+#' @export
 #' @rdname as_dtm
 as_tdm <- function(x, weighting = tm::weightTf, ...){
     UseMethod('as_tdm')
@@ -131,3 +160,15 @@ as_tdm.count_tags <- function(x, weighting = tm::weightTf, ...){
     rownames(y) <- rnms
     tm::as.TermDocumentMatrix(slam::as.simple_triplet_matrix(t(y)), weighting = weighting)
 }
+
+
+
+#' @export
+#' @method as_tdm tag_pos
+as_tdm.tag_pos <- function(x, weighting = tm::weightTf, pos = TRUE, ...){
+
+    if (isTRUE(pos)) x <- get_pos(x) else x <- get_tokens(x)
+    tm::weightTfIdf(q_tdm(x, ...))
+
+}
+

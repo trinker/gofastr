@@ -91,3 +91,14 @@ validate_term_count <- function(x, warn = FALSE, ...){
     TRUE
 }
 
+
+get_pos <- function(x) {
+    sapply(x, function(x) {
+        if (length(x) == 0 | length(x) == 1 && is.na(x)) return(NA)
+        paste(names(x), collapse = " ")
+    })
+}
+
+get_tokens <- function(x) {
+    sapply(x, function(x) paste(x, collapse = " "))
+}

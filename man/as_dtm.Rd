@@ -5,14 +5,20 @@
 \alias{as_tdm}
 \title{Coerce Various Object Into a \code{DocumentTermMatrix}/\code{TermDocumentMatrix}}
 \usage{
-as_dtm(x, weighting = tm::weightTf, ...)
+as_dtm(x, weighting = tm::weightTf, docs = NULL, pos = TRUE, ...)
 
-as_tdm(x, weighting = tm::weightTf, ...)
+as_tdm(x, weighting = tm::weightTf, docs = NULL, pos = TRUE, ...)
 }
 \arguments{
 \item{x}{A data object.}
 
 \item{weighting}{A weighting function capable of handling a \code{tm::DocumentTermMatrix}. It defaults to \code{weightTf} for term frequency weighting. Available weighting functions shipped with the \pkg{tm} package are \code{weightTf}, \code{weightTfIdf}, \code{weightBin}, and \code{weightSMART}.}
+
+\item{docs}{The vector of integers or character strings denoting document
+columns.}
+
+\item{pos}{logical.  If \code{TRUE} parts of speech will be used.  If
+\code{FALSE} the corresponding tokens will be used.}
 
 \item{\ldots}{ignored.}
 }
@@ -26,6 +32,9 @@ Convenience functions to convert a objects from different packages into either a
 with(partial_republican_debates_2015,
     as_dtm(dialogue, paste(location, element_id, sentence_id, sep = "_"))
 )
+
+as_dtm(mtcars)
+as_dtm(CO2, docs = c('Plant', 'Type', 'Treatment'))
 \dontrun{
 ## termco object to DTM/TDM
 library(termco)

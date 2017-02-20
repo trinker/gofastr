@@ -17,10 +17,9 @@ And constructed with the following guidelines:
 * Bug fixes and misc changes bumps the patch
 
 
-gofastr 0.2.0 -
-----------------------------------------------------------------
 
-**BUG FIXES**
+gofastr 0.2.0 - 0.2.1
+----------------------------------------------------------------
 
 **NEW FEATURES**
 
@@ -34,12 +33,6 @@ gofastr 0.2.0 -
   and `TermDocumentMatrix` data structures.  This will allow other packages to
   easily import this function for their objects.
 
-
-**MINOR FEATURES**
-
-**IMPROVEMENTS**
-
-**CHANGES**
 
 
 

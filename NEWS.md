@@ -18,6 +18,21 @@ And constructed with the following guidelines:
 
 
 
+gofastr 0.3.0 -
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+**NEW FEATURES**
+
+**MINOR FEATURES**
+
+**IMPROVEMENTS**
+
+**CHANGES**
+
+
+
 gofastr 0.2.0 - 0.2.1
 ----------------------------------------------------------------
 

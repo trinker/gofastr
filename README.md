@@ -121,7 +121,7 @@ are summarized in the table below:
 <tr class="even">
 <td><code>sub_in_na</code></td>
 <td>manipulation</td>
-<td>Sub missing (<code>NA</code>) for regex matches (defaut: non-content elements)</td>
+<td>Sub missing (<code>NA</code>) for regex matches (default: non-content elements)</td>
 </tr>
 </tbody>
 </table>

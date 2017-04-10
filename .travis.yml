@@ -8,8 +8,6 @@ env:
 
 r_github_packages:
   - jimhester/covr
-  - kbenoit/quanteda
-  - Rdatatable/data.table
 
 before_install:
   - sh -e /etc/init.d/xvfb start

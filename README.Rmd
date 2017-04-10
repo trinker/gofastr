@@ -54,7 +54,7 @@ Functions typically fall into the task category of matrix (1) *creation* & (2) *
 | `filter_tf_idf`        | manipulation | Filter low tf-idf words from `TermDocumentMatrix`/`DocumentTermMatrix` |
 | `filter_documents`     | manipulation | Filter documents from a `TermDocumentMatrix`/`DocumentTermMatrix`      |
 | `select_documents`     | manipulation | Select documents from `TermDocumentMatrix`/`DocumentTermMatrix`        |
-| `sub_in_na`            | manipulation | Sub missing (`NA`) for regex matches (defaut: non-content elements)    |
+| `sub_in_na`            | manipulation | Sub missing (`NA`) for regex matches (default: non-content elements)    |
 
 # Installation
 

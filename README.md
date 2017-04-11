@@ -341,28 +341,6 @@ parameters/hyper-parameters are selected with little regard to analysis.
 
     pacman::p_load(tm, topicmodels, dplyr, tidyr, gofastr, devtools, LDAvis, ggplot2)
 
-    ## also installing the dependency 'modeltools'
-
-    ## package 'modeltools' successfully unpacked and MD5 sums checked
-    ## package 'topicmodels' successfully unpacked and MD5 sums checked
-    ## 
-    ## The downloaded binary packages are in
-    ##  C:\Users\Tyler\AppData\Local\Temp\Rtmpmute4c\downloaded_packages
-
-    ## 
-    ## topicmodels installed
-
-    ## also installing the dependency 'proxy'
-
-    ## package 'proxy' successfully unpacked and MD5 sums checked
-    ## package 'LDAvis' successfully unpacked and MD5 sums checked
-    ## 
-    ## The downloaded binary packages are in
-    ##  C:\Users\Tyler\AppData\Local\Temp\Rtmpmute4c\downloaded_packages
-
-    ## 
-    ## LDAvis installed
-
     ## Source topicmodels2LDAvis function
     devtools::source_url("https://gist.githubusercontent.com/trinker/477d7ae65ff6ca73cace/raw/79dbc9d64b17c3c8befde2436fdeb8ec2124b07b/topicmodels2LDAvis")
 
@@ -408,7 +386,7 @@ parameters/hyper-parameters are selected with little regard to analysis.
             guides(fill=FALSE) +
             xlab("Proportion")
 
-![](inst/figure/unnamed-chunk-12-1.png)
+![](tools/figure/unnamed-chunk-12-1.png)
 
 ### LDAvis of Model
 
@@ -458,7 +436,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 10.1612 secs
+    ## Time difference of 9.264557 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -473,7 +451,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1691039 secs
+    ## Time difference of 0.3552511 secs
 
 ### With Stemming
 
@@ -508,7 +486,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 11.25046 secs
+    ## Time difference of 10.60408 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -523,4 +501,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1891329 secs
+    ## Time difference of 0.16113 secs

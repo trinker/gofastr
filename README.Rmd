@@ -29,7 +29,7 @@ knit_hooks$set(htmlcap = function(before, options, envir) {
     }
     })
 knitr::opts_knit$set(self.contained = TRUE, cache = FALSE)
-knitr::opts_chunk$set(fig.path = "inst/figure/")
+knitr::opts_chunk$set(fig.path = "tools/figure/")
 ```
 
 ![](tools/gofastr_logo/r_gofastr.png) 

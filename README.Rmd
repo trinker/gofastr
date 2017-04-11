@@ -32,7 +32,7 @@ knitr::opts_knit$set(self.contained = TRUE, cache = FALSE)
 knitr::opts_chunk$set(fig.path = "inst/figure/")
 ```
 
-<img src="inst/gofastr_logo/r_gofastr.png" width="150" alt="readability Logo">  
+![](tools/gofastr_logo/r_gofastr.png) 
 
 
 **gofastr** is designed to do one thing really well...make a `DocumentTermMatrix`. It harnesses the

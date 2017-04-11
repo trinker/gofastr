@@ -14,9 +14,11 @@ inst/build.R
 README.Rmd
 README.R
 travis.yml
-inst/gofastr_logo
+tools/gofastr_logo/r_gofastra.png
+tools/gofastr_logo/r_gofastr.pptx
+tools/gofastr_logo/resize_icon.txt
 inst/staticdocs
 inst/extra_statdoc
 inst/maintenance.R
 inst/data_sets.R
-
+Thumb.db

@@ -10,9 +10,10 @@ Status](https://travis-ci.org/trinker/gofastr.svg?branch=master)](https://travis
 [![Coverage
 Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](https://coveralls.io/r/trinker/gofastr?branch=master)
 [![](http://cranlogs.r-pkg.org/badges/gofastr)](https://cran.r-project.org/package=gofastr)
-<a href="https://img.shields.io/badge/Version-0.2.1-orange.svg"><img src="https://img.shields.io/badge/Version-0.2.1-orange.svg" alt="Version"/></a>
+<a href="https://img.shields.io/badge/Version-0.3.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.3.0-orange.svg" alt="Version"/></a>
 </p>
-<img src="inst/gofastr_logo/r_gofastr.png" width="150" alt="readability Logo">
+
+![](tools/gofastr_logo/r_gofastr.png)
 
 **gofastr** is designed to do one thing really well...make a
 `DocumentTermMatrix`. It harnesses the power
@@ -340,6 +341,28 @@ parameters/hyper-parameters are selected with little regard to analysis.
 
     pacman::p_load(tm, topicmodels, dplyr, tidyr, gofastr, devtools, LDAvis, ggplot2)
 
+    ## also installing the dependency 'modeltools'
+
+    ## package 'modeltools' successfully unpacked and MD5 sums checked
+    ## package 'topicmodels' successfully unpacked and MD5 sums checked
+    ## 
+    ## The downloaded binary packages are in
+    ##  C:\Users\Tyler\AppData\Local\Temp\Rtmpmute4c\downloaded_packages
+
+    ## 
+    ## topicmodels installed
+
+    ## also installing the dependency 'proxy'
+
+    ## package 'proxy' successfully unpacked and MD5 sums checked
+    ## package 'LDAvis' successfully unpacked and MD5 sums checked
+    ## 
+    ## The downloaded binary packages are in
+    ##  C:\Users\Tyler\AppData\Local\Temp\Rtmpmute4c\downloaded_packages
+
+    ## 
+    ## LDAvis installed
+
     ## Source topicmodels2LDAvis function
     devtools::source_url("https://gist.githubusercontent.com/trinker/477d7ae65ff6ca73cace/raw/79dbc9d64b17c3c8befde2436fdeb8ec2124b07b/topicmodels2LDAvis")
 
@@ -435,7 +458,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 9.652829 secs
+    ## Time difference of 10.1612 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -450,7 +473,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1791401 secs
+    ## Time difference of 0.1691039 secs
 
 ### With Stemming
 
@@ -485,7 +508,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 11.34504 secs
+    ## Time difference of 11.25046 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -500,4 +523,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.188133 secs
+    ## Time difference of 0.1891329 secs

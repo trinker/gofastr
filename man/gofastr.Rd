@@ -3,8 +3,8 @@
 \docType{package}
 \name{gofastr}
 \alias{gofastr}
-\alias{gofastr-package}
 \alias{package-gofastr}
+\alias{gofastr-package}
 \title{Fast DocumentTermMatrix and TermDocumentMatrix Creation}
 \description{
 This package does one thing...It harness the power of \pkg{quanteda},
@@ -12,4 +12,3 @@ This package does one thing...It harness the power of \pkg{quanteda},
 \code{\link[tm]{TermDocumentMatrix}} & \code{\link[tm]{DocumentTermMatrix}}
 data structures without creating a \code{\link[tm]{Corpus}} first.
 }
-

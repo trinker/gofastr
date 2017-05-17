@@ -76,4 +76,3 @@ presidential_debates_2012_pos \%>\%
 }
 \keyword{documenttermmatrix,}
 \keyword{termdocumentmatrix}
-

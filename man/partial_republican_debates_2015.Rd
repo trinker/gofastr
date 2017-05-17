@@ -25,4 +25,3 @@ the 2016 election.
 \url{http://www.presidency.ucsb.edu}
 }
 \keyword{datasets}
-

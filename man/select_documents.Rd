@@ -32,4 +32,3 @@ select_documents(x, 'romney', ignore.case = TRUE, invert = TRUE) # easier way to
 (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, person, sep = "_"))))
 select_documents(y, '[2-3]')
 }
-

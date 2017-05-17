@@ -34,12 +34,11 @@ filter_tf_idf(x, verbose=TRUE)
 (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(person, time, sep = "_"))))
 filter_tf_idf(y)
 }
-\author{
-Bettina Gr\"{u}n, Kurt Hornik, and Tyler Rinker <tyler.rinker@gmail.com>.
-}
 \references{
 Bettina Gruen & Kurt Hornik (2011). topicmodels: An R Package for
 Fitting Topic Models. Journal of Statistical Software, 40(13), 1-30.
 \url{http://www.jstatsoft.org/article/view/v040i13/v40i13.pdf}
 }
-
+\author{
+Bettina Gr\"{u}n, Kurt Hornik, and Tyler Rinker <tyler.rinker@gmail.com>.
+}

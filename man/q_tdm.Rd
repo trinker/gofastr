@@ -51,4 +51,3 @@ remove_stopwords(x2, stem=TRUE)
 }
 \keyword{TermDocumentMatrix}
 \keyword{tdm}
-

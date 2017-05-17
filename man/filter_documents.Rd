@@ -25,4 +25,3 @@ filter_documents(x)
 (y <- with(presidential_debates_2012, q_tdm(dialogue, paste(time, tot, sep = "_"))))
 filter_documents(y)
 }
-

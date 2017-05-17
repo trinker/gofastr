@@ -70,4 +70,3 @@ grep(" ", x3$dimnames$Terms, value = TRUE) #ngrams
 }
 \keyword{DocumentTermMatrix}
 \keyword{dtm}
-

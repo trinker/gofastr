@@ -1,4 +1,4 @@
-gofastr   [![Follow](https://img.shields.io/twitter/follow/tylerrinker.svg?style=social)](https://twitter.com/intent/follow?screen_name=tylerrinker)
+gofastr   
 ============
 
 
@@ -10,7 +10,6 @@ Status](https://travis-ci.org/trinker/gofastr.svg?branch=master)](https://travis
 [![Coverage
 Status](https://coveralls.io/repos/trinker/gofastr/badge.svg?branch=master)](https://coveralls.io/r/trinker/gofastr?branch=master)
 [![](http://cranlogs.r-pkg.org/badges/gofastr)](https://cran.r-project.org/package=gofastr)
-<a href="https://img.shields.io/badge/Version-0.3.0-orange.svg"><img src="https://img.shields.io/badge/Version-0.3.0-orange.svg" alt="Version"/></a>
 </p>
 
 ![](tools/gofastr_logo/r_gofastr.png)

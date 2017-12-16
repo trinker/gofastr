@@ -379,7 +379,7 @@ parameters/hyper-parameters are selected with little regard to analysis.
             guides(fill=FALSE) +
             xlab("Proportion")
 
-![](tools/figure/unnamed-chunk-45-1.png)
+![](tools/figure/unnamed-chunk-12-1.png)
 
 ### LDAvis of Model
 
@@ -426,7 +426,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.06804895 secs
+    ## Time difference of 0.09306598 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -441,7 +441,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.195137 secs
+    ## Time difference of 0.255193 secs
 
 ### With Stemming
 
@@ -473,7 +473,7 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.1631322 secs
+    ## Time difference of 0.205143 secs
 
     ## gofastr Timing
     tic <- Sys.time()
@@ -488,4 +488,4 @@ significantly less code.
 
     difftime(Sys.time(), tic)
 
-    ## Time difference of 0.170115 secs
+    ## Time difference of 0.200129 secs

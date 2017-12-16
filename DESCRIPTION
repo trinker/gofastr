@@ -3,12 +3,12 @@ Title: Fast DocumentTermMatrix and TermDocumentMatrix Creation
 Version: 0.3.0
 Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut", "cre")))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
-Description: Harness the power of 'quanteda', 'data.table' & 'stringi' to quickly generate 'tm'
-            DocumentTermMatrix and TermDocumentMatrix data structures.
+Description: Harness the power of 'quanteda', 'data.table' & 'stringi' to quickly generate 'tm' DocumentTermMatrix
+             and TermDocumentMatrix data structures.
 Depends: R (>= 3.2.2)
 Suggests: testthat
 Imports: data.table (>= 1.9.5), quanteda, slam, SnowballC, stats, tm
-Date: 2017-05-16
+Date: 2017-12-16
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)

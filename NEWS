@@ -18,18 +18,13 @@ And constructed with the following guidelines:
 
 
 
-gofastr 0.3.0 -
+gofastr 0.3.0
 ----------------------------------------------------------------
 
 BUG FIXES
 
-NEW FEATURES
-
-MINOR FEATURES
-
-IMPROVEMENTS
-
-CHANGES
+* Changed the **quanteda** argument calls to reflect the changes in **quanteda**
+  to use snake case rather than camel case arguments.
 
 
 

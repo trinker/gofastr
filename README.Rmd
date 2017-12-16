@@ -13,6 +13,7 @@ regex <- "(^Version:\\s+)(\\d+\\.\\d+\\.\\d+)"
 loc <- grep(regex, desc)
 ver <- gsub(regex, "\\2", desc[loc])
 verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg"><img src="https://img.shields.io/badge/Version-%s-orange.svg" alt="Version"/></a></p>', ver, ver)
+verbadge <- ''
 ````
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
@@ -216,7 +217,7 @@ lda_model <- topicmodels::LDA(doc_term_mat, 10, control = list(seed=100))
 
 ## Plot the Topics Per Person_Time
 topics <- posterior(lda_model, doc_term_mat)$topics
-topic_dat <- add_rownames(as.data.frame(topics), "Person_Time")
+topic_dat <- tibble::rownames_to_column(as.data.frame(topics), "Person_Time")
 colnames(topic_dat)[-1] <- apply(terms(lda_model, 10), 2, paste, collapse = ", ")
 
 gather(topic_dat, Topic, Proportion, -c(Person_Time)) %>%
@@ -250,13 +251,13 @@ On a smaller `r nrow(presidential_debates_2012)` rows these are the time compari
 
 ```{r}
 pacman::p_load(gofastr, tm)
-pd <- presidential_debates_2012
+pd <- as.data.frame(presidential_debates_2012, stringsAsFactors = FALSE)
 
 ## tm Timing
 tic <- Sys.time()
 rownames(pd) <- paste("docs", 1:nrow(pd))
 pd[['groups']] <- with(pd, paste(time, tot, sep = "_"))
-pd <- Corpus(DataframeSource(pd[, 5:6, drop=FALSE]))
+pd <- Corpus(DataframeSource(setNames(pd[, 5:6, drop=FALSE], c('text', 'doc_id'))))
 
 (out <- DocumentTermMatrix(pd,
     control = list(
@@ -281,13 +282,13 @@ difftime(Sys.time(), tic)
 
 ```{r}
 pacman::p_load(gofastr, tm)
-pd <- presidential_debates_2012
+pd <- as.data.frame(presidential_debates_2012, stringsAsFactors = FALSE)
 
 ## tm Timing
 tic <- Sys.time()
 rownames(pd) <- paste("docs", 1:nrow(pd))
 pd[['groups']] <- with(pd, paste(time, tot, sep = "_"))
-pd <- Corpus(DataframeSource(pd[, 5:6, drop=FALSE]))
+pd <- Corpus(DataframeSource(setNames(pd[, 5:6, drop=FALSE], c('text', 'doc_id'))))
 pd <- tm_map(pd, stemDocument)
 
 (out <- DocumentTermMatrix(pd,

@@ -5,11 +5,11 @@ citEntry(entry = "manual",
     title = "{gofastr}: Fast DocumentTermMatrix and TermDocumentMatrix Creation",
     author = "Tyler W. Rinker",
     address = "Buffalo, New York",
-    note = "version 0.3.0",
+    note = "version 0.3.1",
     year = "2017",
     url = "http://github.com/trinker/gofastr",
     textVersion  = paste("Rinker, T. W. (2017).",
         "gofastr: Fast DocumentTermMatrix and TermDocumentMatrix Creation",
-        "version 0.3.0. Buffalo, New York.",
+        "version 0.3.1. Buffalo, New York.",
         "http://github.com/trinker/gofastr")
 )

@@ -61,7 +61,9 @@ q_dtm <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FALSE,
         docs <- sort(unique(docs))
     }
 
-    out <- quanteda::convert(quanteda::dfm(text, stem = FALSE, verbose = FALSE, remove_numbers = FALSE, ...), to = to)
+    input <- quanteda::tokens(text, remove_numbers = FALSE, verbose = FALSE, ...) |>
+        quanteda::dfm()
+    out <- quanteda::convert(input, to = to)
     row.names(out) <- docs
     if (!is.null(ngrams))colnames(out) <- gsub('gofastrseparatorgofastr', ' ', colnames(out))
 
@@ -100,7 +102,11 @@ q_dtm_stem <- function(text, docs = seq_along(text), to = "tm", keep.hyphen = FA
         docs <- sort(unique(docs))
     }
 
-    out <- quanteda::convert(quanteda::dfm(text, stem = TRUE, verbose = FALSE, remove_numbers = FALSE, ...), to = to)
+    input <- quanteda::tokens(text, remove_numbers = FALSE, verbose = FALSE, ...) |>
+        quanteda::tokens_wordstem() |>
+        quanteda::dfm()
+    out <- quanteda::convert(input, to = to)
+    
     row.names(out) <- docs
     if (!is.null(ngrams))colnames(out) <- gsub('gofastrseparatorgofastr', ' ', colnames(out))
 
